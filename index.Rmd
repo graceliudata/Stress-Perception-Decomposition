@@ -1,6 +1,6 @@
 --- 
-title: "YOUR TITLE HERE"
-author: "YOUR NAMES HERE"
+title: "Stress Perception Decomposition"
+author: "Hongling Liu, Megan Goldring, Xinrui Zhang and Yuxin Zhou"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 ---
