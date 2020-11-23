@@ -72,6 +72,7 @@ library(tidyr)
 library(scales)
 library(tibble)
 library(forcats)
+library(dplyr)
 ```
 
 Write a draft of the [Missing Values chapter](https://edav.info/project#report-format)
