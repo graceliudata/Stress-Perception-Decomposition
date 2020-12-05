@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Interactive component
 
 One of the questions we’re interested in is how our students react to different types of content and what kinds of issues cause them more stress than others. We created a stacked bar chart to illustrate our findings:
@@ -13,3 +14,20 @@ One of the questions we’re interested in is how our students react to differen
 4. The survey in Session 2 seems to reflect an overall lower level of stress comparing to the results from Session 1, which may be effected by external factors such as the time period where our survey were conducted. 
 
 
+=======
+# Interactive component
+
+One of the questions we’re interested in is how our students react to different types of content and what kinds of issues cause them more stress than others. We created a stacked bar chart to illustrate our findings:
+
+<iframe src="resources/interactive.html" width="800" height="450"></iframe>
+
+1. Based on our stacked bar chart, we could tell that there are more vignettes in categories like *Work/Education*, *Discrimination* and *Misc*, and there are relatively less vignettes in Health/Accicdent than other categories. 
+
+2. For content in regard to *Discrimination* and *Finances*, there are a larger portion of students that feel high level of stress. This founding makes sense since college students are typically young adults that lack financial literacy and economic stability, and race has always been a sensitive issue that causes stress on people and especially young people.
+
+3. There is a larger portion of students that are indifferent about content related to *Health/Accident*, which also makes sense considering that college students are typically in good health and health may be least of their worries. However, it suprises me that there is also a sightly larger portion of students that are indifferent about content related to *Discrimination*, which may indicate that some people may be less conscious about issues relating to race, although there are also a large percentage of people that are very conscious about that.
+
+4. The survey in Session 2 seems to reflect an overall lower level of stress comparing to the results from Session 1, which may be effected by external factors such as the time period where our survey were conducted. 
+
+
+>>>>>>> 337f11d405f9c602d346ea99797677dc3566e7f1

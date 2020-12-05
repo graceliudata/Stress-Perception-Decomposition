@@ -4,6 +4,4 @@ data-transformation
 missing-values
 results
 interactive-component
-section
-interactive-component-1
 conclusion
