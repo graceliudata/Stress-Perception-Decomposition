@@ -13,9 +13,9 @@ library(dplyr)
 ```
 
 ```{r}
-poms_dat <- readRDS("poms_dat.RDS")
-vignette_dat <- readRDS("vignette_dat.RDS")
-Baseline <- read_csv("Baseline.csv")
+poms_dat <- readRDS("Data/poms_dat.RDS")
+vignette_dat <- readRDS("Data/vignette_dat.RDS")
+Baseline <- read_csv("Data/Baseline.csv")
 ```
 
 Our data missing analysis involves 3 data sets: Mood data, Vignette data and Baseline data.
