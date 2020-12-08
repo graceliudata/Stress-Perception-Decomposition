@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Interactive component
 
 One of the questions we’re interested in is how our students react to different types of content and what kinds of issues cause them more stress than others. We created a stacked bar chart to illustrate our findings:
