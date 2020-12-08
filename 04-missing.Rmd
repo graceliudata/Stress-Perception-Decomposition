@@ -1,5 +1,4 @@
 # Missing Values
-`install.packages("questionr")`
 
 ```{r}
 library(readr)
