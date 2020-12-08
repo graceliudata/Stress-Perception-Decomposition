@@ -24,7 +24,7 @@
 <meta name="author" content="Hongling Liu, Megan Goldring, Xinrui Zhang and Yuxin Zhou" />
 
 
-<meta name="date" content="2020-12-07" />
+<meta name="date" content="2020-12-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="missing-values.html"/>
-<link rel="next" href="conclusion.html"/>
+<link rel="next" href="interactive-component.html"/>
 <script src="libs/header-attrs-2.4/header-attrs.js"></script>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -75,7 +75,8 @@
 <li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing Values</a></li>
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
-<li class="chapter" data-level="6" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>6</b> Conclusion</a></li>
+<li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
+<li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -97,44 +98,13 @@
             <section class="normal" id="section-">
 <div id="results" class="section level1" number="5">
 <h1><span class="header-section-number">Chapter 5</span> Results</h1>
-
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-# Interactive component</p>
-<p>One of the questions we’re interested in is how our students react to different types of content and what kinds of issues cause them more stress than others. We created a stacked bar chart to illustrate our findings:</p>
-<iframe src="resources/interactive.html" width="800" height="450">
-</iframe>
-<ol style="list-style-type: decimal">
-<li><p>Based on our stacked bar chart, we could tell that there are more vignettes in categories like <em>Work/Education</em>, <em>Discrimination</em> and <em>Misc</em>, and there are relatively less vignettes in Health/Accicdent than other categories.</p></li>
-<li><p>For content in regard to <em>Discrimination</em> and <em>Finances</em>, there are a larger portion of students that feel high level of stress. This founding makes sense since college students are typically young adults that lack financial literacy and economic stability, and race has always been a sensitive issue that causes stress on people and especially young people.</p></li>
-<li><p>There is a larger portion of students that are indifferent about content related to <em>Health/Accident</em>, which also makes sense considering that college students are typically in good health and health may be least of their worries. However, it suprises me that there is also a sightly larger portion of students that are indifferent about content related to <em>Discrimination</em>, which may indicate that some people may be less conscious about issues relating to race, although there are also a large percentage of people that are very conscious about that.</p></li>
-<li><p>The survey in Session 2 seems to reflect an overall lower level of stress comparing to the results from Session 1, which may be effected by external factors such as the time period where our survey were conducted.</p></li>
-</ol>
-<p>=======
-# Interactive component</p>
-<p>One of the questions we’re interested in is how our students react to different types of content and what kinds of issues cause them more stress than others. We created a stacked bar chart to illustrate our findings:</p>
-<iframe src="resources/interactive.html" width="800" height="450">
-</iframe>
-<ol style="list-style-type: decimal">
-<li><p>Based on our stacked bar chart, we could tell that there are more vignettes in categories like <em>Work/Education</em>, <em>Discrimination</em> and <em>Misc</em>, and there are relatively less vignettes in Health/Accicdent than other categories.</p></li>
-<li><p>For content in regard to <em>Discrimination</em> and <em>Finances</em>, there are a larger portion of students that feel high level of stress. This founding makes sense since college students are typically young adults that lack financial literacy and economic stability, and race has always been a sensitive issue that causes stress on people and especially young people.</p></li>
-<li><p>There is a larger portion of students that are indifferent about content related to <em>Health/Accident</em>, which also makes sense considering that college students are typically in good health and health may be least of their worries. However, it suprises me that there is also a sightly larger portion of students that are indifferent about content related to <em>Discrimination</em>, which may indicate that some people may be less conscious about issues relating to race, although there are also a large percentage of people that are very conscious about that.</p></li>
-<li><p>The survey in Session 2 seems to reflect an overall lower level of stress comparing to the results from Session 1, which may be effected by external factors such as the time period where our survey were conducted.</p></li>
-</ol>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>337f11d405f9c602d346ea99797677dc3566e7f1</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+<p>One major question of interest in this study was whether participant’s self-reports of how stressed they would be in each scenario corresponds with objective coder ratings of the severity of those scenarios, as coded by the Daily Inventory of Stressful Events (DISE) scheme (Midus, 1994). A priori, we expected that participant ratings of the stressfulness of the events would correspond with the objective coders’ ratings of the severity of the events. Both the subjective responses and the objective codes ranged from 0=not at all to 4=extremely. We were also interested in investing whether variance in subjective reports depended on the objective codes; for example, whether scenarios in the 2-3 range in objective severity were more variable while those in the high and low ranges of severity exhibited less variability. To explore these ideas, we build six histogram-style ridge plots, three for each session (session 1 or session 2 of the study) and one for each measure of stress (how ‘stressed’ did you feel? how ‘overwhelmed’ did you feel? and an aggregate score that is the mean of how ‘stressed’ and ‘overwhelmed’ participants felt). In the plots below, the x-axis is subjective ratings of stressed, overwhelmed, and the aggregate and the y-axis is the ID number for the vignettes. The y-axis is ordered such that vignettes at the top are the most objectively severe scenarios (4=extremely stressful) and decrease down the axis to the bottom, which contains vignettes rated as least objectively severe (0=not at all stressful). The objective severity of the scenarios is also color-coded, as depicted in a legend to the right of the plots.
+<img src="finalproj_files/figure-html/unnamed-chunk-13-1.png" width="672" /><img src="finalproj_files/figure-html/unnamed-chunk-13-2.png" width="672" /><img src="finalproj_files/figure-html/unnamed-chunk-13-3.png" width="672" /><img src="finalproj_files/figure-html/unnamed-chunk-13-4.png" width="672" /><img src="finalproj_files/figure-html/unnamed-chunk-13-5.png" width="672" /><img src="finalproj_files/figure-html/unnamed-chunk-13-6.png" width="672" /></p>
+<p>We have several key takeaways from these visualizations. All discussion refers to all three ways of operationalizing stress: how ‘stressed’, how ‘overwhelmed’, and the aggregate of ‘stressed’ and ‘overwhelmed’ that paticipants reported. First, we see that participants generally report that they would be less stressed than expected by the objective coding scheme; many participants rate scenarios that are objectively a ‘1’ as a ‘0’, those that are objectively a ‘2’ as a ‘1’, and so on. However, the under-reporting is most severe for the low-range objective stressors (the 1’s and 2’s). At the same time, we do see the expected general increase in mean subjective ratings of stress across the objective range, with more objectively severe stressors being rated as more subjectively stressor. Next, we observe less variability in the high and low ranges of the scale, particularly in the ‘0’ range. This implies that participants generally perceive very non-severe and very severe stressors as consensually stressful (i.e. little disagreement about the stressfulness of these scenarios), while subjective interpretation and therefore variability emerges in the ‘2’ and ‘3’ range of the objective scale. We think this visualization does a nice job of laying out the correspondene between objetive coding of the stressors and subjective interpretations of them.</p>
+<pre><code>                                                  ################</code></pre>
+<p>We were also interested in visualizing the distribution of responses to the two questions asked for each scenario: ‘have you experienced something like this before?’ (1=yes) and ‘was it easy to imagine yourself in this scenario?’ (1=yes). We therefore calculated the proportion of participants who responded yes to each question and visualized a box and whisker plot of those proportions. We chose box and whisker plots because we are interested in finding outliers; in the next iteration of the study we will likely exclude scenarios that were extreme in terms of describing events that the sample hadn’t experienced and being difficult to imagine oneself in the scenario.
+<img src="finalproj_files/figure-html/unnamed-chunk-14-1.png" width="672" /><img src="finalproj_files/figure-html/unnamed-chunk-14-2.png" width="672" /></p>
+<p>These visualizations reveal several important things about the study. First, participants generally indicated that it was easy to imagine themselves in the scenarios (means for both session were above 90%), even though they hadn’t necessarily been in situations exactly like them before (means for both sessions around 45%-50%). However, there were a few scenarios that participants found difficult to imagine: scnarios 165 and 48. In the next iteration of the study, we will likely remove these scenarios and replace them with situations that are more commonly experienced by undergraduate students.</p>
 
 </div>
             </section>
@@ -143,7 +113,7 @@
         </div>
       </div>
 <a href="missing-values.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="conclusion.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="interactive-component.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
