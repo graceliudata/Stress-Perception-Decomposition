@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Missing values | Stress Perception Decomposition</title>
-  <meta name="description" content="Chapter 4 Missing values | Stress Perception Decomposition" />
+  <title>Chapter 4 Missing Values | Stress Perception Decomposition</title>
+  <meta name="description" content="Chapter 4 Missing Values | Stress Perception Decomposition" />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Missing values | Stress Perception Decomposition" />
+  <meta property="og:title" content="Chapter 4 Missing Values | Stress Perception Decomposition" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Missing values | Stress Perception Decomposition" />
+  <meta name="twitter:title" content="Chapter 4 Missing Values | Stress Perception Decomposition" />
   
   
   
@@ -24,7 +24,7 @@
 <meta name="author" content="Hongling Liu, Megan Goldring, Xinrui Zhang and Yuxin Zhou" />
 
 
-<meta name="date" content="2020-12-05" />
+<meta name="date" content="2020-12-07" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -73,10 +73,9 @@
 <li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
 <li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a></li>
 <li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
-<li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing values</a></li>
+<li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing Values</a></li>
 <li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
-<li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
-<li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
+<li class="chapter" data-level="6" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>6</b> Conclusion</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 </ul>
@@ -97,7 +96,55 @@
 
             <section class="normal" id="section-">
 <div id="missing-values" class="section level1" number="4">
-<h1><span class="header-section-number">Chapter 4</span> Missing values</h1>
+<h1><span class="header-section-number">Chapter 4</span> Missing Values</h1>
+<p>Our data missing analysis involves 3 data sets: Mood data, Vignette data and Baseline data.</p>
+<pre><code>##          missing %
+## ID             0 0
+## Session        0 0
+## vignette       0 0
+## score          0 0</code></pre>
+<pre><code>##          missing %
+## ID             0 0
+## Session        0 0
+## vignette       0 0
+## score          0 0</code></pre>
+<p>Among those 3 data sets, only Baseline data has different percentage of values missing.
+For column patterns, we can see that the top 3 variables have the most missing data: ‘non_heteronormative_3_TEXT’, ‘gender_idetity_5_TEXT’ and ‘race_12_TEXT’
+This is quite reasonable since these variables are used to store the explanation part if people choose the ‘other’ option for variable ‘non_heteronormative’, ‘gender_idetity’ and ‘race’, respectively. Therefore, the reason why these 3 columns has leading missing values is people choose common options but rarely the ‘other’ option for ‘non_heteronormative’, ‘gender_idetity’ and ‘race’ variables.</p>
+<pre><code>##                            missing   %
+## non_heteronormative_3_TEXT     201 100
+## gender_idetity_5_TEXT          199  99
+## race_12_TEXT                   197  98
+## mother_education                62  31
+## father_education                62  31
+## period                          58  29
+## gender_idetity                  47  23
+## contraceptive                   26  13
+## loc2                            20  10
+## household_income                20  10
+## loc1                            19   9
+## loc3                            19   9
+## coherence6                      19   9
+## sibling_age                     19   9
+## focus1                          18   9
+## focus2                          18   9
+## focus3                          18   9
+## focus4                          18   9
+## focus5                          18   9
+## focus6                          18   9</code></pre>
+<p>For row patterns, with each row represents a student survey results, we found that there were 17 out of 201 students that only fill out a few of survey question and then quit. In fact, we decide to remove those who did not fill out at least 75% of the survey for data cleaning.</p>
+<pre><code>##   [1]   4   4   4   6   5   4   5   4   4   4   4   4   4   4   4   5   5   4   4   4   4   4   4   3 179   6
+##  [27] 180   4   4   4   5 178   5   5   7   5   5   4   7   5   5   5   5   5   5   5   6 178   6   6   5   5
+##  [53]   5   5   6   5   4   6   5   7   6   5   5   5   5   6   5   5   8   5   7   5 179   3   3   6  75   3
+##  [79]   3   3   6   3   3   3   3   3 180   3 179   3   3   3   3   3   3   4   3   3 178 178   3   4   3   4
+## [105] 165   3   3   3   3   3   3   3   3   3   3 179   3   3 180   2   3   3   4   3   3   3   3   4   3   3
+## [131]   6 178   8   3   3 154   3   3   5 178   3   4   3   3   3   3   4   3   4   4   3   5   3   3   3   3
+## [157]   3   2   3   3   3   5   5   3   3   4   3   3   3   3 179   3   3   3   1   4   3   4   6   3   3   5
+## [183]   3   3   3   3   3   4 180   4   3   4   4   3   4   3   4   3   4   4   4</code></pre>
+<p>Here is a heatmap for row/column missing pattern, where x-axis for columns (survey questions), y-axis for row index (id for students)
+1.While yellow cells indicates missing data, we can see patterns of 3 vertical yellow lines (top 3 variables with missing values) and 17 horizontal yellow lines (17 students miss more than 75% questions)
+2.There is another pattern that students with id 31-73 have missing values for variable father_education and mother_education.</p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 
 </div>
             </section>
