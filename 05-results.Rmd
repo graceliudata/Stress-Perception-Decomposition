@@ -8,7 +8,15 @@ library(ggplot2) #for data visualization
 library(ggridges) #to make histogram-like ridge plots
 library(forcats) #for respecifying levels of a factor (i.e. the reorder() function)
 library(ggrepel) #to separate the labels of outliers in a box and whisker plot
+library("readr")
+library("htmlwidgets")
+library("GGally")
+library("vcd")
+library("readxl")
+library("viridis")
+library("RColorBrewer")
 ```
+
 
 One major question of interest in this study was whether participant's self-reports of how stressed they would be in each scenario corresponds with objective coder ratings of the severity of those scenarios, as coded by the Daily Inventory of Stressful Events (DISE) scheme (Midus, 1994). A priori, we expected that participant ratings of the stressfulness of the events would correspond with the objective coders' ratings of the severity of the events. Both the subjective responses and the objective codes ranged from 0=not at all to 4=extremely. 
 
@@ -140,6 +148,144 @@ We have several key takeaways from these visualizations. All discussion refers t
 First, we see that participants generally report that they would be less stressed than expected by the objective coding scheme; many participants rate scenarios that are objectively a '1' as a '0', those that are objectively a '2' as a '1', and so on. However, the under-reporting is most severe for the low-range objective stressors (the 1's and 2's). At the same time, we do see the expected general increase in mean subjective ratings of stress across the objective range, with more objectively severe stressors being rated as more subjectively stressors. 
 
 Next, we observe less variability in the high and low ranges of the scale, particularly in the '0' range. This implies that participants generally perceive very non-severe and very severe stressors as consensually stressful (i.e. little disagreement about the stressfulness of these scenarios), while subjective interpretation and therefore variability emerges in the '2' and '3' range of the objective scale. We think this visualization does a nice job of laying out the correspondence between objetive coding of the stressors and subjective interpretations of them. 
+
+                                        #############################################
+
+```{r include=FALSE}
+#Read in Data
+Baseline %>% mutate(relationship = (gsr_1 + gsr_2 + gsr_3 + gsr_4 + gsr_5 + gsr_6 + gsr_7 + gsr_8)/8) %>% 
+  mutate(loneliness =  (ucla2 + ucla3 +ucla4+ucla7+ucla8+ucla11+ucla12+ucla13+ucla14+ucla17+ucla18 + 45 - (ucla1 +ucla5+ucla6+ucla9+ucla10+ucla15+ucla16+ucla19+ucla20))/20) %>%
+  select(sid, sex_assignment, household_income, relationship,loneliness) -> family
+colnames(family)[1] = "ID"
+vignette_dat$ID <- as.character(vignette_dat$ID)
+family$ID <- as.character(family$ID)
+vignette_family <- left_join(vignette_dat, family, by = "ID")
+
+#Data type
+vignette_family$score <- as.numeric(vignette_family$score)
+vignette_family$vignette <- as.character(vignette_family$vignette)
+vignette_family$sex_assignment <- as.factor(vignette_family$sex_assignment)
+
+#Remain only stressed and overwhelmed answer
+Remain <- c()
+for (i in seq(1,nrow(vignette_family))){
+  if((str_detect(vignette_family$vignette[i], "stressed") == T) | (str_detect(vignette_family$vignette[i], "Overwhelmed") == T)){
+    Remain[i] = 1
+  }
+  else{
+    Remain[i] = 0
+  }
+}
+vignette_family$remain <- Remain
+vignette_family <- subset(vignette_family, vignette_family$remain == 1)
+
+#string name processing
+vignette_family$vignette  <- extract_numeric(vignette_family$vignette)
+vignette_family$vignette <- as.character(vignette_family$vignette)
+
+#unique record for each participant
+vignette_family %>% group_by(ID, vignette) %>% mutate(Score = mean(score)) %>% ungroup() -> v_family
+v_family <- v_family %>% distinct(ID , vignette,.keep_all = T)
+v_family$sex_assignment <- as.character(v_family$sex_assignment)
+v_family <- na.omit(v_family)
+v_family$vignette <- as.character(v_family$vignette)
+v_family$sex_assignment[v_family$sex_assignment == 1] <- "Female"
+v_family$sex_assignment[v_family$sex_assignment == 0] <- "Male"
+
+# cut continuouse number in levels
+v_family$Relationship <- cut(v_family$relationship, 3, labels = c("not understanding","medium","close"))
+v_family$Household_income <- cut(v_family$household_income,3, labels = c("low","medium","high"))
+v_family %>% group_by(ID) %>% mutate(PeopleTotalScore = sum(Score)) %>% ungroup() -> v_family
+v_family$PeopleTotalScoreF <- cut(v_family$PeopleTotalScore, 3, labels = c("relaxed","medium","stressed"))
+v_family$Loneliness <- cut(v_family$loneliness, 3, labels = c("not_lonely", "medium", "lonely"))
+
+#content of vignette
+colnames(Code)[1] <- "vignette"
+Code$vignette <- as.character(Code$vignette)
+colnames(Code)[4] <- "content"
+Code$content <- as.character(Code$content)
+colnames(Code)[9] <- "severity"
+Code$severity <- as.factor(Code$severity)
+Code %>% select(vignette,content, severity) -> code_selected
+
+code_selected$content[code_selected$content == 1] <- "Interpersonal Tension"
+code_selected$content[code_selected$content == 2] <- "Work/Education"
+code_selected$content[code_selected$content == 3] <- "Home"
+code_selected$content[code_selected$content == 4] <- "Finances"
+code_selected$content[code_selected$content == 5] <- "Health/Accident"
+code_selected$content[code_selected$content == 6] <- "Discrimination"
+code_selected$content[code_selected$content == 7] <- "Misc"
+
+v_content <- left_join(v_family, code_selected, by = "vignette")
+#v_content$father_education <- as.factor(v_content$father_education)
+#v_content$mother_education <- as.factor(v_content$mother_education)
+v_content$sex_assignment <- as.factor(v_content$sex_assignment)
+v_content$score <- as.factor(v_content$score)
+v_content$severity <-as.factor(v_content$severity)
+v_content$Loneliness <- as.factor(v_content$Loneliness)
+
+```
+The vignettes are designed with different severity. The termiology "severity" means how sever the potential consequence resulted from the conditions described in the vignettes may be.The severity is leveled into 4 levels, where 0 indicates the least severe and 4 stands for the most severe. Also, the vignettes are designed with different contents that are categorized into 7 categories: *Discrimination*,*Finances*,*Health/Accident*, *Home*, *Interpersonal Tension*, *Misc*, *Work/Education*. We want to see how people react under different "Severity" and different contents.
+
+1) Reaction v.s. Severity
+From mosaic plot, we can see higher severity contributes more to the higher score, that is, the vignette with higher severity yield more high scores. From the bar plot, we can see an approximate "V" shape. With lower severity(1-3), the counts of scores is in an approximate descending order(score 0 counts most, score 4 counts least). With higher severity(3-4), the counts of scores is in an approximate ascending order(score 0 counts least, score 4 counts most). The bar plot can explain the proportion pattern presents in the mosaic plot consistently.
+```{r echo=FALSE}
+colors = c("#B95084","#8662C1", "#626CC1", "#F4CE67","#b2abd2", "#5e3c99","#87BDF7")
+
+vcd::mosaic(severity~ score,v_content, direction = c("v","h"),
+           highlighting_fill = viridis, main = "Reaction v.s. Severity")
+v_content %>% group_by(score,severity) %>% summarise(Counts = n()) %>% ungroup() %>%
+ggplot(aes(x = severity, y = Counts,fill =  score)) +
+geom_bar(position = "dodge", stat = "identity",color = "#5D5F80") +
+scale_fill_viridis_d() + labs(title = "Reaction v.s. Severity")
+```
+
+2) Reaction v.s. Content
+The mosaic plots show clearly that the higher score, the "Discrimination" and "Finance" contributes more. In other words, the vignettes with contents related to discrimination and finance yield more high scores. From bar plots, under contents Health/Accident,  Home, Interpersonal Tension, Misc, and Work/Education, the counts of the score presents an approximate descending order(score 0 counts most, score 4 counts last). However, for contents Discrimination and Finance, the counts of score is relatively even or in an ascending order, that is the reason why this two contents contribute more in higher score. Another pattern we can find from mosaic plot is that the contribution of Health/Accident across the score basically stays same. 
+
+```{r echo=FALSE}
+vcd::mosaic(content~ score,v_content, direction = c("v","h"),
+            highlighting_fill = brewer.pal(n = 7, name = "PuOr"),rot_labels=c(0,90,0,0),gp_labels = gpar(fontsize = 7),
+            main = "Reaction v.s. Content")
+
+v_content %>% group_by(score,content) %>% summarise(Counts = n()) %>% ungroup() %>%
+ggplot(aes(x = content, y = Counts,fill =  score)) +
+geom_bar(position = "dodge", stat = "identity",color = "#5D5F80") +
+scale_fill_brewer(palette = "PuOr") + labs(title = "Reaction v.s. Content")
+```
+
+                                        #############################################
+                                        
+We also would like to see how people's baseline condition may have impacts on people's reaction to stress. We have *sex assignment*, *household income*, *loneliness*, *relationship with a people's close ones* these four factors seleted. *sex assignment* is simply clustered as "Male" and "Female". Other three factors are seperated in 3 levels respectively. By doing parallel coordinate graph, our goal is to see if clustering patterns exist for each factor. The parallel columns state for each vignette, ordered from most severe to least severe(left are those stressful conditions that may lead to the most severe consequence, and right are those that may lead to the least severe consequence). From graphs below, the only clustering pattern we can see is from *sex assignment*. It shows that males are more likely to state that they are good at dealing with those stressful conditions that may lead to severe consequence. other three fatcors present no evident impact on people's reaction.
+
+```{r echo=FALSE, =}
+v_content %>% arrange(desc(severity)) %>%
+  select(ID,Score,vignette,Household_income,sex_assignment,relationshipF) %>%
+  pivot_wider(names_from = vignette, values_from = Score) %>%
+  ggparcoord(columns = (5:60),scale = "globalminmax", alphaLines = 0.5,groupColumn = "sex_assignment") + 
+  scale_color_viridis(discrete=TRUE) + labs(title = "Grouped by Sex")
+
+v_content %>% arrange(desc(severity)) %>%
+  select(ID,Score,vignette,Household_income,relationshipF,Loneliness) %>%
+  pivot_wider(names_from = vignette, values_from = Score) %>%
+  ggparcoord(columns = (5:60),scale = "globalminmax", alphaLines = 0.5,groupColumn = "Household_income") + 
+  scale_color_viridis(discrete=TRUE)+ labs(title = "Grouped by Household Income")
+
+v_content %>% arrange(desc(severity)) %>%
+  select(ID,Score,vignette,Household_income,relationshipF,Loneliness) %>%
+  pivot_wider(names_from = vignette, values_from = Score) %>%
+  ggparcoord(columns = (5:60),scale = "globalminmax", alphaLines = 0.5, groupColumn = "Loneliness") + 
+  scale_color_viridis(discrete=TRUE)+ labs(title = "Grouped by Lonliness")
+
+v_content %>% arrange(desc(severity)) %>%
+  select(ID,Score,vignette,Household_income,Relationship,sex_assignment) %>%
+  pivot_wider(names_from = vignette, values_from = Score) %>%
+  ggparcoord(columns = (5:60),scale = "globalminmax", alphaLines = 0.5,groupColumn = "Relationship") + 
+  scale_color_viridis(discrete=TRUE)+ labs(title = "Relationship with Close Ones")
+
+```
+
+
 
                                                       ################
 
