@@ -266,19 +266,19 @@ We also would like to see how people's baseline condition may have impacts on pe
 
 ```{r echo=FALSE}
 v_content %>% arrange(desc(severity)) %>%
-  select(ID,Score,vignette,Household_income,sex_assignment,relationshipF) %>%
+  select(ID,Score,vignette,Household_income,sex_assignment,Relationship) %>%
   pivot_wider(names_from = vignette, values_from = Score) %>%
   ggparcoord(columns = (5:60),scale = "globalminmax", alphaLines = 0.5,groupColumn = "sex_assignment") + 
   scale_color_viridis(discrete=TRUE) + labs(title = "Grouped by Sex")
 
 v_content %>% arrange(desc(severity)) %>%
-  select(ID,Score,vignette,Household_income,relationshipF,Loneliness) %>%
+  select(ID,Score,vignette,Household_income,Relationship,Loneliness) %>%
   pivot_wider(names_from = vignette, values_from = Score) %>%
   ggparcoord(columns = (5:60),scale = "globalminmax", alphaLines = 0.5,groupColumn = "Household_income") + 
   scale_color_viridis(discrete=TRUE)+ labs(title = "Grouped by Household Income")
 
 v_content %>% arrange(desc(severity)) %>%
-  select(ID,Score,vignette,Household_income,relationshipF,Loneliness) %>%
+  select(ID,Score,vignette,Household_income,Relationship,Loneliness) %>%
   pivot_wider(names_from = vignette, values_from = Score) %>%
   ggparcoord(columns = (5:60),scale = "globalminmax", alphaLines = 0.5, groupColumn = "Loneliness") + 
   scale_color_viridis(discrete=TRUE)+ labs(title = "Grouped by Lonliness")
