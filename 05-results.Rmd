@@ -293,7 +293,7 @@ v_content %>% arrange(desc(severity)) %>%
 
 
 
-                                                      ################
+                                        #############################################
 
 We were also interested in visualizing the distribution of responses to the two questions asked for each scenario: 'have you experienced something like this before?' (1=yes) and 'was it easy to imagine yourself in this scenario?' (1=yes). We therefore calculated the proportion of participants who responded yes to each question and visualized a box and whisker plot of those proportions. We chose box and whisker plots because we are interested in finding outliers; in the next iteration of the study we will likely exclude scenarios that were extreme in terms of describing events that the sample hadn't experienced and being difficult to imagine oneself in the scenario.
 ```{r, message=FALSE, results = FALSE}
