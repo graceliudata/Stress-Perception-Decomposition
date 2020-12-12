@@ -153,6 +153,12 @@ Next, we observe less variability in the high and low ranges of the scale, parti
 
 ```{r include=FALSE}
 #Read in Data
+poms_dat <- readRDS("Data/poms_dat.RDS")
+vignette_dat <- readRDS("Data/vignette_dat.RDS")
+Baseline <- read.csv("Data/Baseline.csv")
+Code = read_excel("Data/Coded Vignettes.xlsx", sheet = "Vignettes")
+
+#Join
 Baseline %>% mutate(relationship = (gsr_1 + gsr_2 + gsr_3 + gsr_4 + gsr_5 + gsr_6 + gsr_7 + gsr_8)/8) %>% 
   mutate(loneliness =  (ucla2 + ucla3 +ucla4+ucla7+ucla8+ucla11+ucla12+ucla13+ucla14+ucla17+ucla18 + 45 - (ucla1 +ucla5+ucla6+ucla9+ucla10+ucla15+ucla16+ucla19+ucla20))/20) %>%
   select(sid, sex_assignment, household_income, relationship,loneliness) -> family
@@ -258,7 +264,7 @@ scale_fill_brewer(palette = "PuOr") + labs(title = "Reaction v.s. Content")
                                         
 We also would like to see how people's baseline condition may have impacts on people's reaction to stress. We have *sex assignment*, *household income*, *loneliness*, *relationship with a people's close ones* these four factors seleted. *sex assignment* is simply clustered as "Male" and "Female". Other three factors are seperated in 3 levels respectively. By doing parallel coordinate graph, our goal is to see if clustering patterns exist for each factor. The parallel columns state for each vignette, ordered from most severe to least severe(left are those stressful conditions that may lead to the most severe consequence, and right are those that may lead to the least severe consequence). From graphs below, the only clustering pattern we can see is from *sex assignment*. It shows that males are more likely to state that they are good at dealing with those stressful conditions that may lead to severe consequence. other three fatcors present no evident impact on people's reaction.
 
-```{r echo=FALSE, =}
+```{r echo=FALSE}
 v_content %>% arrange(desc(severity)) %>%
   select(ID,Score,vignette,Household_income,sex_assignment,relationshipF) %>%
   pivot_wider(names_from = vignette, values_from = Score) %>%
