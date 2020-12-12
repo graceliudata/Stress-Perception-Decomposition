@@ -24,7 +24,7 @@
 <meta name="author" content="Hongling Liu, Megan Goldring, Xinrui Zhang and Yuxin Zhou" />
 
 
-<meta name="date" content="2020-12-08" />
+<meta name="date" content="2020-12-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -98,6 +98,12 @@
             <section class="normal" id="section-">
 <div id="data-sources" class="section level1" number="2">
 <h1><span class="header-section-number">Chapter 2</span> Data sources</h1>
+<p>This data comes from a study designed and run by Megan, who is also a PhD student in the Psychology Department. We confirmed with Professor Robbins that using this dataset is appropriate for the EDAV course.</p>
+<p>The main purpose of the study was to conduct a crossed random effects model in order to decompose variability in stress perception into person, stressor, and person by stressor components. To do so, we asked multiple people to provide ratings of how ‘stressed’ and ‘overwhelmed’ they would be to each of 60 vignettes designed to range in ‘objective’ stress. Although the crossed random effect model is not part of our project for this class, visualizing and analyzing the raw data will be.</p>
+<p>In generating the vignettes of stressful events, we used the Daily Inventory of Stressful Events coding scheme. This scheme trains objective coders to rate each vignette. Two coders were trained and rated each vignette according to the DISE scheme; specifically how ‘objectively’ severe the stressor is from 0=not at all to 4=extremely, the life category that the stressor falls into (i.e. home, work, etc), whether the stressor was chronic, whether it was a continuation of a stressor from a previous day, and whether the focus of involvement for the stressor was the self or someone else (i.e. a close family member).</p>
+<p>To collect the data, 157 undergraduate students at Columbia participated for course credit. The study took place in 3 parts: 1) a 15-minute pre-study baseline survey, 2) study session one, and 3) study session two. The baseline survey assessed relevant psychological constructs such as loneliness, chronic stress experiences, and stress mindsets, in addition to demographic variables such as participant year in school, race, family income, etc. The second part consisted of meeting a trained research assistant online via Zoom. Participants first provided informed consent, then completed 3 brief mood questionnaires (Profile of Mood States; assessing current mood, mood during COVID, and mood in general in their life), followed by responding to each of the 60 vignettes. Upon hearing the research assistant read each vignette out loud, participants indicated: 1) how ‘stressed’ they would be from 0=not at all to 4=extremely, 2) how ‘overwhelmed’ they would be from 0=not at all to 4= extremely, 3) whether they had experienced something like the event described in the vignette with 1=yes and 0=no 4) whether it was easy to imagine themselves in the scenario described in the vignette with 1=yes and 0= no.</p>
+<p>All data was therefore collected online via Qualtrics and it is all self-report survey data. The different data files contain different types of variables; either between-stressor measures of the vignettes (i.e. the objective codes), between-person measures of psychological traits and demographics (i.e. baseline data), or within-person stressor measures (i.e. the session 1 and session 2 data).</p>
+<p>Due to the nature of the study (i.e. Columbia students filling out the surveys for course credit), there is very little missingness and few errors. The only errors that we did find (and not resolve!) was that three of the vignettes had more questions than they were supposed to. We opted to simply remove those vignettes from analysis for the purpose of this class.</p>
 
 </div>
             </section>
@@ -156,6 +162,20 @@ gitbook.start({
 });
 </script>
 
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
 </body>
 
 </html>
