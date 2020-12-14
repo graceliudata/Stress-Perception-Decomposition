@@ -10,6 +10,7 @@
       }
     </style>
     <script src="https://d3js.org/d3.v6.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.24.0/d3-legend.js"></script>
   </head>
   <body>
     <svg id="chart" width="650" height="400"></svg>
@@ -19,6 +20,7 @@
 
     <input type="checkbox" id="sort" />
     Toggle sort
+
   </body>
 
   <script>
@@ -51,7 +53,7 @@
 
       var x = d3
         .scaleBand()
-        .range([margin.left, width - margin.right])
+        .range([margin.left, width - margin.right-30])
         .padding(0.1);
 
       var y = d3
@@ -81,6 +83,16 @@
           '#1B3409',
         ])
         .domain(keys);
+      
+        svg.append("g")
+      .attr("class", "legendOrdinal")
+ .attr("transform", "translate(600,120)");
+      
+    var legendOrdinal = d3.legendColor().ascending(true).title('Severity')
+    	.scale(z);
+    
+    svg.select(".legendOrdinal")
+	  	.call(legendOrdinal);
       update(d3.select('#session').property('value'), 0);
       function update(input, speed) {
         var data = csv.filter((f) => f.Session == input);
@@ -195,6 +207,6 @@
           update(select.property('value'), 750);
         });
     }
-    // Open Chrome developer tools to see this.
+
   </script>
 </html>
