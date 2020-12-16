@@ -1,13 +1,15 @@
 # Interactive component
 
-One of the questions we’re interested in is how our students react to different types of content and what kinds of issues cause them more stress than others. We created a stacked bar chart to illustrate our findings:
+One of the questions we’re interested in is how our students react to different types of content and what kinds of issues cause them more stress than others. We created two stacked bar charts to illustrate our findings:
 
-<iframe src="resources/interactive.html" width="800" height="450"></iframe>
+<iframe src="resources/total.html" width="800" height="450"></iframe>
 
-1. Based on our stacked bar chart, we could tell that there are more vignettes in categories like *Work/Education*, *Discrimination* and *Misc*, and there are relatively less vignettes in Health/Accicdent than other categories. 
+<iframe src="resources/percentage.html" width="800" height="450"></iframe>
+
+1. Based on our first stacked bar chart *Content Classification of Vignettes*, we could tell that there are more vignettes in categories like *Work/Education*, *Discrimination* and *Misc*, and there are relatively less vignettes in Health/Accident than other categories. 
 
 2. For content in regard to *Discrimination* and *Finances*, there are a larger portion of students that feel high level of stress. This founding makes sense since college students are typically young adults that lack financial literacy and economic stability, and race has always been a sensitive issue that causes stress on people and especially young people.
 
-3. There is a larger portion of students that are indifferent about content related to *Health/Accident*, which also makes sense considering that college students are typically in good health and health may be least of their worries. However, it suprises me that there is also a sightly larger portion of students that are indifferent about content related to *Discrimination*, which may indicate that some people may be less conscious about issues relating to race, although there are also a large percentage of people that are very conscious about that.
+3. There is a larger portion of students that are indifferent about content (when stress severity = 0) related to *Interpersonal Tension* and *Health/Accident*, which also makes sense, considering that college students are typically in good health and rarely need to worry about complicated working relationships, or any relationships in general, so interpersonal tension and health may be least of their worries, comparing to other issues. However, it surprises me that there is also a larger portion of students that are indifferent about content related to *Discrimination*, which may indicate that some people may be less conscious about issues relating to race, while there are also a large percentage of people that are very conscious about that.
 
-4. The survey in Session 2 seems to reflect an overall lower level of stress comparing to the results from Session 1, which may be effected by external factors such as the time period where our survey were conducted. 
+4. Based on our first stacked bar chart *Content Classification of Vignettes*, the survey in Session 2 seems to reflect an overall lower level of stress comparing to the results from Session 1, also we can find an interesting twist in our second graph *Content Classification Frequency*, where the position of *Health/Accident* and *Work/Education* swapped when sorting by the percentage of most severe level of stress, which may be effected by external factors such as the time period where our survey were conducted. We conducted our first survey around the end of October where students seem to have higher level of stress on every categories of content, and when we did our second survey around the beginning of November, we could see an overall decrease of stress level, particularly on *Work/Education*. Therefore, we could see that external events could also cause the fluctuation of stress level.
