@@ -1,2 +1,5 @@
 # Conclusion
 
+We have some limitations with our data in three aspects and we can take those into accounts for future directions: 
+First, we only have 157 students complete the survey with valid amount of answers, which might be relatively small. As the dataset grows larger, we will have more accurate output on some visualizations. 
+Second, the fact that only Columbia undergraduate students took the survey might lead to somewhat bias on individual factors such as income or family backgrounds. Third, we have relatively large proportions (~25%) of missing data for columns like father education and mother education, which has weakened our analysis on these two factors by certain degree.
