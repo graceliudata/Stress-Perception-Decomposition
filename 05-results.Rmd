@@ -17,6 +17,7 @@ library("viridis")
 library("RColorBrewer")
 ```
 
+## Examination on Objective Coder Ratings
 
 One major question of interest in this study was whether participant's self-reports of how stressed they would be in each scenario corresponds with objective coder ratings of the severity of those scenarios, as coded by the Daily Inventory of Stressful Events (DISE) scheme (Midus, 1994). A priori, we expected that participant ratings of the stressfulness of the events would correspond with the objective coders' ratings of the severity of the events. Both the subjective responses and the objective codes ranged from 0=not at all to 4=extremely. 
 
@@ -26,7 +27,7 @@ In the plots below, the x-axis is subjective ratings of stressed, overwhelmed, a
 
 ```{r, message=FALSE, results = FALSE}
 #read in subjective ratings of vignettes
-subj <- readRDS("vignette_dat.RDS")
+subj <- readRDS("Data/vignette_dat.RDS")
 
 #take out participant 130 because two participant's have that ID...
 el <- which(subj$ID == 130)
@@ -50,7 +51,7 @@ subj1$stressed <- s1$score #create 'clearer' variable for self reported stress
 subj1$overwhelmed <- o1$score #create variable for overwhelmed
 
 #read in objective codes of vignettes
-obj <- read.csv("objective codes.csv")
+obj <- read.csv("Data/objective codes.csv")
 #subjset down to vignette ID's and objective codes
 obj <- obj[,c(1,9)]
 #relabel column headings
@@ -103,7 +104,7 @@ subj2$stressed <- s2$score #create 'clearer' variable for self reported stress
 subj2$overwhelmed <- o2$score #create variable for overwhelmed
 
 #read in objective codes of vignettes
-obj <- read.csv("objective codes.csv")
+obj <- read.csv("Data/objective codes.csv")
 #subjset down to vignette ID's and objective codes
 obj <- obj[,c(1,9)]
 #relabel column headings
@@ -149,7 +150,7 @@ First, we see that participants generally report that they would be less stresse
 
 Next, we observe less variability in the high and low ranges of the scale, particularly in the '0' range. This implies that participants generally perceive very non-severe and very severe stressors as consensually stressful (i.e. little disagreement about the stressfulness of these scenarios), while subjective interpretation and therefore variability emerges in the '2' and '3' range of the objective scale. We think this visualization does a nice job of laying out the correspondence between objetive coding of the stressors and subjective interpretations of them. 
 
-                                        #############################################
+## Stress Levels on Different Objective Coder Ratings (Severity Levels)
 
 ```{r include=FALSE}
 #Read in Data
@@ -260,7 +261,7 @@ geom_bar(position = "dodge", stat = "identity",color = "#5D5F80") +
 scale_fill_brewer(palette = "PuOr") + labs(title = "Reaction v.s. Content")
 ```
 
-                                        #############################################
+## Exploration on Individual Factors 
                                         
 We also would like to see how people's baseline condition may have impacts on people's reaction to stress. We have *sex assignment*, *household income*, *loneliness*, *relationship with a people's close ones* these four factors seleted. *sex assignment* is simply clustered as "Male" and "Female". Other three factors are seperated in 3 levels respectively. By doing parallel coordinate graph, our goal is to see if clustering patterns exist for each factor. The parallel columns state for each vignette, ordered from most severe to least severe(left are those stressful conditions that may lead to the most severe consequence, and right are those that may lead to the least severe consequence). For each people's score, we averaged the scores from stressed level and overwhelmed level, then took the average of records from 2 sessions. From graphs below, the only clustering pattern we can see is from *sex assignment*. It shows that males are more likely to state that they are good at dealing with those conditions with higher severity.And overally, females present to be more stressed then males. Other three fatcors present no evident impact on people's reaction.
 
@@ -269,7 +270,7 @@ v_content %>% arrange(desc(severity)) %>%
   select(ID,Score,vignette,Household_income,sex_assignment,Relationship) %>%
   pivot_wider(names_from = vignette, values_from = Score) %>%
   ggparcoord(columns = (5:60),scale = "globalminmax", alpha = 0.5,groupColumn = "sex_assignment",splineFactor = 10) + 
-  scale_color_manual(values = c("#F9A1B9","#6BAEFE")) + labs(title = "Grouped by Sex")+ theme(legend.position="bottom")+ theme(axis.text.x = element_text(size=5))
+  scale_color_manual(values = c("#fe9c8f","#84c1ff")) + labs(title = "Grouped by Sex")+ theme(legend.position="bottom")+ theme(axis.text.x = element_text(size=5))
 
 v_content %>% arrange(desc(severity)) %>%
   select(ID,Score,vignette,Household_income,Relationship,Loneliness) %>%
@@ -292,8 +293,7 @@ v_content %>% arrange(desc(severity)) %>%
 ```
 
 
-
-                                        #############################################
+## Potential Vignettes Outliers
 
 We were also interested in visualizing the distribution of responses to the two questions asked for each scenario: 'have you experienced something like this before?' (1=yes) and 'was it easy to imagine yourself in this scenario?' (1=yes). We therefore calculated the proportion of participants who responded yes to each question and visualized a box and whisker plot of those proportions. We chose box and whisker plots because we are interested in finding outliers; in the next iteration of the study we will likely exclude scenarios that were extreme in terms of describing events that the sample hadn't experienced and being difficult to imagine oneself in the scenario.
 ```{r, message=FALSE, results = FALSE}
@@ -387,4 +387,4 @@ ggplot(e2, aes(x = session, y = proportion)) +
 
 ```
 
-These visualizations reveal several important things about the study. First, participants generally indicated that it was easy to imagine themselves in the scenarios (means for both session were above 90%), even though they hadn't necessarily been in situations exactly like them before (means for both sessions around 45%-50%). However, there were a few scenarios that participants found difficult to imagine: scnarios 165 and 48. In the next iteration of the study, we will likely remove these scenarios and replace them with situations that are more commonly experienced by undergraduate students.
+These visualizations reveal several important things about the study. First, participants generally indicated that it was easy to imagine themselves in the scenarios (means for both session were above 90%), even though they hadn't necessarily been in situations exactly like them before (means for both sessions around 45%-50%). However, there were a few scenarios that participants found difficult to imagine: scenarios 165 and 48. In the next iteration of the study, we will likely remove these scenarios and replace them with situations that are more commonly experienced by undergraduate students.

@@ -74,7 +74,13 @@
 <li class="chapter" data-level="2" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>2</b> Data sources</a></li>
 <li class="chapter" data-level="3" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>3</b> Data transformation</a></li>
 <li class="chapter" data-level="4" data-path="missing-values.html"><a href="missing-values.html"><i class="fa fa-check"></i><b>4</b> Missing Values</a></li>
-<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a></li>
+<li class="chapter" data-level="5" data-path="results.html"><a href="results.html"><i class="fa fa-check"></i><b>5</b> Results</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="results.html"><a href="results.html#examination-on-objective-coder-ratings"><i class="fa fa-check"></i><b>5.1</b> Examination on Objective Coder Ratings</a></li>
+<li class="chapter" data-level="5.2" data-path="results.html"><a href="results.html#stress-levels-on-different-objective-coder-ratings-severity-levels"><i class="fa fa-check"></i><b>5.2</b> Stress Levels on Different Objective Coder Ratings (Severity Levels)</a></li>
+<li class="chapter" data-level="5.3" data-path="results.html"><a href="results.html#exploration-on-individual-factors"><i class="fa fa-check"></i><b>5.3</b> Exploration on Individual Factors</a></li>
+<li class="chapter" data-level="5.4" data-path="results.html"><a href="results.html#potential-vignettes-outliers"><i class="fa fa-check"></i><b>5.4</b> Potential Vignettes Outliers</a></li>
+</ul></li>
 <li class="chapter" data-level="6" data-path="interactive-component.html"><a href="interactive-component.html"><i class="fa fa-check"></i><b>6</b> Interactive component</a></li>
 <li class="chapter" data-level="7" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i><b>7</b> Conclusion</a></li>
 <li class="divider"></li>
@@ -100,121 +106,8 @@
 <h1><span class="header-section-number">Chapter 3</span> Data transformation</h1>
 <p>There are four datafiles that we are working with: the objective code data file, the baseline data file, the mood measure data file (contains both session’s worth of data), and the vignette data file (also contains both session’s worth of data).</p>
 <p>We cleaned the baseline data in excel prior to inputting it in R; there are only a few “clean ups” that needed to happen: 1) eliminate rows 2 and 3 that contained meta data about the survey, 2) eliminate columns 2-15 because they contained irrelevant variables (i.e. longitude and latitude at which the survey was taken), and 3) eliminate the column with participant birthdays, as this is personally identifiable information and we only received IRB approval to disseminate and post completely anonymized data.</p>
-<p>The experimental data sessions were a little trickier. In order to partially randomize the order of the vignettes, participants were a priori randomly assigned to one of ten conditions, where all conditions contained the exact same vignettes but in a different order. Therefore, the structure of each of these datasets is the same first few columns (those obtaining informed consent and the mood measures) followed by the vignette questions that were in different orders depending on the datafile. Because of this, we had to read in 10 separate datafiles, restructure them, and merge them. We used the following code to do so:</p>
-<p>#load necessary libraries
-library(tidyverse)</p>
-<p>#Read in the data</p>
-<p>cond1 &lt;- read.csv(“cond_1.csv”)</p>
-<p>cond2 &lt;- read.csv(“cond_2.csv”)</p>
-<p>cond3 &lt;- read.csv(“cond_3.csv”)</p>
-<p>cond4 &lt;- read.csv(“cond_4.csv”)</p>
-<p>cond5 &lt;- read.csv(“cond_5.csv”)</p>
-<p>cond6 &lt;- read.csv(“cond_6.csv”)</p>
-<p>cond7 &lt;- read.csv(“cond_7.csv”)</p>
-<p>cond8 &lt;- read.csv(“cond_8.csv”)</p>
-<p>cond9 &lt;- read.csv(“cond_9.csv”)</p>
-<p>cond10 &lt;- read.csv(“cond_10.csv”)</p>
-<p>#Eliminate unecessary rows and columns (i.e. ip address and rows with question labels)</p>
-<p>cond1 &lt;- cond1[-c(1:2),-c(1,2,3,4,5,8,9,10,11,12,13,14,15,16,17)]</p>
-<p>cond2 &lt;- cond2[-c(1:2),-c(1,2,3,4,5,8,9,10,11,12,13,14,15,16,17)]</p>
-<p>cond3 &lt;- cond3[-c(1:2),-c(1,2,3,4,5,8,9,10,11,12,13,14,15,16,17)]</p>
-<p>cond4 &lt;- cond4[-c(1:2),-c(1,2,3,4,5,8,9,10,11,12,13,14,15,16,17)]</p>
-<p>cond5 &lt;- cond5[-c(1:2),-c(1,2,3,4,5,8,9,10,11,12,13,14,15,16,17)]</p>
-<p>cond6 &lt;- cond6[-c(1:2),-c(1,2,3,4,5,8,9,10,11,12,13,14,15,16,17)]</p>
-<p>cond7 &lt;- cond7[-c(1:2),-c(1,2,3,4,5,8,9,10,11,12,13,14,15,16,17)]</p>
-<p>cond8 &lt;- cond8[-c(1:2),-c(1,2,3,4,5,8,9,10,11,12,13,14,15,16,17)]</p>
-<p>cond9 &lt;- cond9[-c(1:2),-c(1,2,3,4,5,8,9,10,11,12,13,14,15,16,17)]</p>
-<p>cond10 &lt;- cond10[-c(1:2),-c(1,2,3,4,5,8,9,10,11,12,13,14,15,16,17)]</p>
-<p>#re-label columns</p>
-<p>cond1 &lt;- plyr::rename(cond1, c(“Duration..in.seconds.”=“Duration_sec”, “Q304”=“Consent”, “Q289”=“ID”, “Q290”=“Session”))</p>
-<p>cond2 &lt;- plyr::rename(cond2, c(“Duration..in.seconds.”=“Duration_sec”, “Q304”=“Consent”, “Q289”=“ID”, “Q290”=“Session”))</p>
-<p>cond3 &lt;- plyr::rename(cond3, c(“Duration..in.seconds.”=“Duration_sec”, “Q304”=“Consent”, “Q289”=“ID”, “Q290”=“Session”))</p>
-<p>cond4 &lt;- plyr::rename(cond4, c(“Duration..in.seconds.”=“Duration_sec”, “Q304”=“Consent”, “Q289”=“ID”, “Q290”=“Session”))</p>
-<p>cond5 &lt;- plyr::rename(cond5, c(“Duration..in.seconds.”=“Duration_sec”, “Q304”=“Consent”, “Q289”=“ID”, “Q290”=“Session”))</p>
-<p>cond6 &lt;- plyr::rename(cond6, c(“Duration..in.seconds.”=“Duration_sec”, “Q304”=“Consent”, “Q289”=“ID”, “Q290”=“Session”))</p>
-<p>cond7 &lt;- plyr::rename(cond7, c(“Duration..in.seconds.”=“Duration_sec”, “Q304”=“Consent”, “Q289”=“ID”, “Q290”=“Session”))</p>
-<p>cond8 &lt;- plyr::rename(cond8, c(“Duration..in.seconds.”=“Duration_sec”, “Q304”=“Consent”, “Q289”=“ID”, “Q290”=“Session”))</p>
-<p>cond9 &lt;- plyr::rename(cond9, c(“Duration..in.seconds.”=“Duration_sec”, “Q304”=“Consent”, “Q289”=“ID”, “Q290”=“Session”))</p>
-<p>cond10 &lt;- plyr::rename(cond10, c(“Duration..in.seconds.”=“Duration_sec”, “Q304”=“Consent”, “Q289”=“ID”, “Q290”=“Session”))</p>
-<p>#label condition</p>
-<p>cond1$Condition &lt;- 1</p>
-<p>cond2$Condition &lt;- 2</p>
-<p>cond3$Condition &lt;- 3</p>
-<p>cond4$Condition &lt;- 4</p>
-<p>cond5$Condition &lt;- 5</p>
-<p>cond6$Condition &lt;- 6</p>
-<p>cond7$Condition &lt;- 7</p>
-<p>cond8$Condition &lt;- 8</p>
-<p>cond9$Condition &lt;- 9</p>
-<p>cond10$Condition &lt;- 10</p>
-<p>#eliminate vignettes 6, 127, and 143 because something went wrong with those vignettes and we don’t know what</p>
-<p>cond1 &lt;- cond1[,-c(which(str_detect(colnames(cond1), “V6_”)), which(str_detect(colnames(cond1), “V127_”)), which(str_detect(colnames(cond1), “V143_”)))]</p>
-<p>cond2 &lt;- cond2[,-c(which(str_detect(colnames(cond2), “V6_”)), which(str_detect(colnames(cond2), “V127_”)), which(str_detect(colnames(cond2), “V143_”)))]</p>
-<p>cond3 &lt;- cond3[,-c(which(str_detect(colnames(cond3), “V6_”)), which(str_detect(colnames(cond3), “V127_”)), which(str_detect(colnames(cond3), “V143_”)))]</p>
-<p>cond4 &lt;- cond4[,-c(which(str_detect(colnames(cond4), “V6_”)), which(str_detect(colnames(cond4), “V127_”)), which(str_detect(colnames(cond4), “V143_”)))]</p>
-<p>cond5 &lt;- cond5[,-c(which(str_detect(colnames(cond5), “V6_”)), which(str_detect(colnames(cond5), “V127_”)), which(str_detect(colnames(cond5), “V143_”)))]</p>
-<p>cond6 &lt;- cond6[,-c(which(str_detect(colnames(cond6), “V6_”)), which(str_detect(colnames(cond6), “V127_”)), which(str_detect(colnames(cond6), “V143_”)))]</p>
-<p>cond7 &lt;- cond7[,-c(which(str_detect(colnames(cond7), “V6_”)), which(str_detect(colnames(cond7), “V127_”)), which(str_detect(colnames(cond7), “V143_”)))]</p>
-<p>cond8 &lt;- cond8[,-c(which(str_detect(colnames(cond8), “V6_”)), which(str_detect(colnames(cond8), “V127_”)), which(str_detect(colnames(cond8), “V143_”)))]</p>
-<p>cond9 &lt;- cond9[,-c(which(str_detect(colnames(cond9), “V6_”)), which(str_detect(colnames(cond9), “V127_”)), which(str_detect(colnames(cond9), “V143_”)))]</p>
-<p>cond10 &lt;- cond10[,-c(which(str_detect(colnames(cond10), “V6_”)), which(str_detect(colnames(cond10), “V127_”)), which(str_detect(colnames(cond10), “V143_”)))]</p>
-<p>#separate poms measures and vignettes</p>
-<p>cond1_poms &lt;- cond1[,c(4:23,259)]</p>
-<p>cond1_vign &lt;- cond1[,c(4,5,37:259)]</p>
-<p>cond2_poms &lt;- cond2[,c(4:23,259)]</p>
-<p>cond2_vign &lt;- cond2[,c(4,5,37:259)]</p>
-<p>cond3_poms &lt;- cond3[,c(4:23,259)]</p>
-<p>cond3_vign &lt;- cond3[,c(4,5,37:259)]</p>
-<p>cond4_poms &lt;- cond4[,c(4:23,259)]</p>
-<p>cond4_vign &lt;- cond4[,c(4,5,37:259)]</p>
-<p>cond5_poms &lt;- cond5[,c(4:23,259)]</p>
-<p>cond5_vign &lt;- cond5[,c(4,5,37:259)]</p>
-<p>cond6_poms &lt;- cond6[,c(4:23,259)]</p>
-<p>cond6_vign &lt;- cond6[,c(4,5,37:259)]</p>
-<p>cond7_poms &lt;- cond7[,c(4:23,259)]</p>
-<p>cond7_vign &lt;- cond7[,c(4,5,37:259)]</p>
-<p>cond8_poms &lt;- cond8[,c(4:23,259)]</p>
-<p>cond8_vign &lt;- cond8[,c(4,5,37:259)]</p>
-<p>cond9_poms &lt;- cond9[,c(4:23,259)]</p>
-<p>cond9_vign &lt;- cond9[,c(4,5,37:259)]</p>
-<p>cond10_poms &lt;- cond10[,c(4:23,259)]</p>
-<p>cond10_vign &lt;- cond10[,c(4,5,37:259)]</p>
-<p>#make vignette dataset
-#merge together</p>
-<p>dat &lt;- dplyr::bind_rows(cond1_vign, cond2_vign)</p>
-<p>dat &lt;- dplyr::bind_rows(dat, cond3_vign)</p>
-<p>dat &lt;- dplyr::bind_rows(dat, cond4_vign)</p>
-<p>dat &lt;- dplyr::bind_rows(dat, cond5_vign)</p>
-<p>dat &lt;- dplyr::bind_rows(dat, cond6_vign)</p>
-<p>dat &lt;- dplyr::bind_rows(dat, cond7_vign)</p>
-<p>dat &lt;- dplyr::bind_rows(dat, cond8_vign)</p>
-<p>dat &lt;- dplyr::bind_rows(dat, cond9_vign)</p>
-<p>dat &lt;- dplyr::bind_rows(dat, cond10_vign)</p>
-<p>#eliminate pilot data and test runs</p>
-<p>dat<span class="math inline">\(ID &lt;- as.numeric(dat\)</span>ID)</p>
-<p>dat &lt;- dat[which(dat$ID &lt; 999),]</p>
-<p>#wide to long</p>
-<p>datl &lt;- tidyr::gather(dat, key = vignette, value = “score”, 3:224)</p>
-<p>#save datafile</p>
-<p>saveRDS(datl, file = “vignette_dat.RDS”)</p>
-<p>#make poms datafile
-#merge together</p>
-<p>dat &lt;- dplyr::bind_rows(cond1_poms, cond2_poms)</p>
-<p>dat &lt;- dplyr::bind_rows(dat, cond3_poms)</p>
-<p>dat &lt;- dplyr::bind_rows(dat, cond4_poms)</p>
-<p>dat &lt;- dplyr::bind_rows(dat, cond5_poms)</p>
-<p>dat &lt;- dplyr::bind_rows(dat, cond6_poms)</p>
-<p>dat &lt;- dplyr::bind_rows(dat, cond7_poms)</p>
-<p>dat &lt;- dplyr::bind_rows(dat, cond8_poms)</p>
-<p>dat &lt;- dplyr::bind_rows(dat, cond9_poms)</p>
-<p>dat &lt;- dplyr::bind_rows(dat, cond10_poms)</p>
-<p>#eliminate pilot data and test runs</p>
-<p>dat<span class="math inline">\(ID &lt;- as.numeric(dat\)</span>ID)</p>
-<p>dat &lt;- dat[which(dat$ID &lt; 999),]</p>
-<p>#wide to long
-datl &lt;- tidyr::gather(dat, key = item, value = “score”, 3:20)</p>
-<p>#save datafile</p>
-<p>saveRDS(datl, file = “poms_dat.RDS”)</p>
+<p>The experimental data sessions were a little trickier. In order to partially randomize the order of the vignettes, participants were a priori randomly assigned to one of ten conditions, where all conditions contained the exact same vignettes but in a different order. Therefore, the structure of each of these datasets is the same first few columns (those obtaining informed consent and the mood measures) followed by the vignette questions that were in different orders depending on the datafile. Because of this, we had to read in 10 separate datafiles, restructure them, and merge them. The codes are linked as below:</p>
+<p><a href="https://github.com/graceliudata/Stress-Perception-Decomposition/blob/main/Data/Transformation.Rmd" class="uri">https://github.com/graceliudata/Stress-Perception-Decomposition/blob/main/Data/Transformation.Rmd</a></p>
 
 </div>
             </section>
@@ -273,20 +166,6 @@ gitbook.start({
 });
 </script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
-  (function () {
-    var script = document.createElement("script");
-    script.type = "text/javascript";
-    var src = "true";
-    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
-    if (location.protocol !== "file:")
-      if (/^https?:/.test(src))
-        src = src.replace(/^https?:/, '');
-    script.src = src;
-    document.getElementsByTagName("head")[0].appendChild(script);
-  })();
-</script>
 </body>
 
 </html>

@@ -2,9 +2,9 @@
 
 One of the questions we’re interested in is how our students react to different types of content and what kinds of issues cause them more stress than others. We created two stacked bar charts to illustrate our findings:
 
-<iframe src="resources/total.html" width="800" height="450"></iframe>
+<iframe src="resources/total.html" width="800" height="500"></iframe>
 
-<iframe src="resources/percentage.html" width="800" height="450"></iframe>
+<iframe src="resources/percentage.html" width="800" height="500"></iframe>
 
 1. Based on our first stacked bar chart *Content Classification of Vignettes*, we could tell that there are more vignettes in categories like *Work/Education*, *Discrimination* and *Misc*, and there are relatively less vignettes in Health/Accident than other categories. 
 

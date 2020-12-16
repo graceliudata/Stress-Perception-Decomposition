@@ -3,5 +3,9 @@ data-sources
 data-transformation
 missing-values
 results
+examination-on-objective-coder-ratings
+stress-levels-on-different-objective-coder-ratings-severity-levels
+exploration-on-individual-factors
+potential-vignettes-outliers
 interactive-component
 conclusion
