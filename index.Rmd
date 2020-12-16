@@ -6,3 +6,7 @@ site: bookdown::bookdown_site
 ---
  
 # Introduction
+
+In today’s fast-paced modern world, people can easily get stressed out in many different aspects of their lives, and the causes of stress can differ from person to person depending on one’s gender, age or even relationship with a person’s close ones. Therefore, with curiosity of how people perceive and respond to different stressors, we start to conduct visualization analysis on data coming from a stress research and try our best to bring some insights to this important area of study. 
+
+In this project, we want to find answers to whether people’s stress level response to different scenarios is aligned with the objective coder ratings of how severe those scenarios are. We also interested in how different contents of scenarios influence people’s stressfulness. In the last, we would also like to show if there are any individual factors such as sex and income may influence their level of stress to different degree.
