@@ -6,8 +6,6 @@ We cleaned the baseline data in excel prior to inputting it in R; there are only
 
 The experimental data sessions were a little trickier. In order to partially randomize the order of the vignettes, participants were a priori randomly assigned to one of ten conditions, where all conditions contained the exact same vignettes but in a different order.  Therefore, the structure of each of these datasets is the same first few columns (those obtaining informed consent and the mood measures) followed by the vignette questions that were in different orders depending on the datafile. Because of this, we had to read in 10 separate datafiles, restructure them, and merge them. The codes are linked as below:
 
-
-
-
+https://github.com/graceliudata/Stress-Perception-Decomposition/blob/main/Data/Transformation.Rmd
 
 
