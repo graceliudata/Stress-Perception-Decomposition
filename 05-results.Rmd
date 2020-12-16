@@ -26,7 +26,7 @@ In the plots below, the x-axis is subjective ratings of stressed, overwhelmed, a
 
 ```{r, message=FALSE, results = FALSE}
 #read in subjective ratings of vignettes
-subj <- readRDS("Data/vignette_dat.RDS")
+subj <- readRDS("vignette_dat.RDS")
 
 #take out participant 130 because two participant's have that ID...
 el <- which(subj$ID == 130)
@@ -50,7 +50,7 @@ subj1$stressed <- s1$score #create 'clearer' variable for self reported stress
 subj1$overwhelmed <- o1$score #create variable for overwhelmed
 
 #read in objective codes of vignettes
-obj <- read.csv("Data/objective codes.csv")
+obj <- read.csv("objective codes.csv")
 #subjset down to vignette ID's and objective codes
 obj <- obj[,c(1,9)]
 #relabel column headings
@@ -75,19 +75,19 @@ subj1$severity <- as.factor(subj1$severity) #change to class factor
 ggplot(subj1, aes(x = stressed, y = vid, fill = severity)) + 
   geom_density_ridges(stat="binline")+
   ggtitle("Session 1 - Stressed")+
-  theme_ridges()
+  theme_ridges()+ theme(axis.text.y = element_text(size=5))+ theme(legend.position="bottom")
 
 #overwhelmed 
 ggplot(subj1, aes(x = overwhelmed, y = vid, fill = severity)) + 
   geom_density_ridges(stat="binline")+
   ggtitle("Session 1 - Overwhelmed")+
-  theme_ridges()
+  theme_ridges()+ theme(axis.text.y = element_text(size=5))+ theme(legend.position="bottom")
 
 #aggregate
 ggplot(subj1, aes(x = agg_stress, y = vid, fill = severity)) + 
   geom_density_ridges(stat="binline")+
   ggtitle("Session 1 - Aggregate of Stressed and Overwhelmed")+
-  theme_ridges()
+  theme_ridges()+ theme(axis.text.y = element_text(size=5))+ theme(legend.position="bottom")
 
 #SESSION 2
 #subset and generate aggregate stressed score (aggregate of stressed and overwhelmed)
@@ -103,7 +103,7 @@ subj2$stressed <- s2$score #create 'clearer' variable for self reported stress
 subj2$overwhelmed <- o2$score #create variable for overwhelmed
 
 #read in objective codes of vignettes
-obj <- read.csv("Data/objective codes.csv")
+obj <- read.csv("objective codes.csv")
 #subjset down to vignette ID's and objective codes
 obj <- obj[,c(1,9)]
 #relabel column headings
@@ -128,19 +128,19 @@ subj2$severity <- as.factor(subj2$severity) #change to class factor
 ggplot(subj2, aes(x = stressed, y = vid, fill = severity)) + 
   geom_density_ridges(stat="binline")+
   ggtitle("Session 2 - Stressed")+
-  theme_ridges()
+  theme_ridges()+ theme(axis.text.y = element_text(size=5))+ theme(legend.position="bottom")
 
 #overwhelmed 
 ggplot(subj2, aes(x = overwhelmed, y = vid, fill = severity)) + 
   geom_density_ridges(stat="binline")+
   ggtitle("Session 2 - Overwhelmed")+
-  theme_ridges()
+  theme_ridges()+ theme(axis.text.y = element_text(size=5))+ theme(legend.position="bottom")
 
 #aggregate
 ggplot(subj2, aes(x = agg_stress, y = vid, fill = severity)) + 
   geom_density_ridges(stat="binline")+
   ggtitle("Session 2 - Aggregate of Stressed and Overwhelmed")+
-  theme_ridges()
+  theme_ridges()+ theme(axis.text.y = element_text(size=5))+ theme(legend.position="bottom")
 ```
 
 We have several key takeaways from these visualizations. All discussion refers to all three ways of operationalizing stress: how 'stressed', how 'overwhelmed', and the aggregate of 'stressed' and 'overwhelmed' that paticipants reported. 
@@ -234,7 +234,7 @@ v_content$Loneliness <- as.factor(v_content$Loneliness)
 The vignettes are designed with different severity. The termiology "severity" means how sever the potential consequence resulted from the conditions described in the vignettes may be.The severity is leveled into 4 levels, where 0 indicates the least severe and 4 stands for the most severe. Also, the vignettes are designed with different contents that are categorized into 7 categories: *Discrimination*,*Finances*,*Health/Accident*, *Home*, *Interpersonal Tension*, *Misc*, *Work/Education*. We want to see how people react under different "Severity" and different contents.
 
 1) Reaction v.s. Severity
-From mosaic plot, we can see higher severity contributes more to the higher score, that is, the vignette with higher severity yield more high scores. From the bar plot, we can see an approximate "V" shape. With lower severity(1-3), the counts of scores is in an approximate descending order(score 0 counts most, score 4 counts least). With higher severity(3-4), the counts of scores is in an approximate ascending order(score 0 counts least, score 4 counts most). The bar plot can explain the proportion pattern presents in the mosaic plot consistently.
+From mosaic plot, we can see higher severity contributes more to the higher score, that is, the vignette with higher severity yield more high scores in proportion. From the bar plot, we can see an approximate "V" shape. With lower severity(1-3), the counts of scores is in an approximate descending order(score 0 counts most, score 4 counts least). With higher severity(3-4), the counts of scores is in an approximate ascending order(score 0 counts least, score 4 counts most). The bar plot can explain the proportion pattern presents in the mosaic plot consistently.
 ```{r echo=FALSE}
 colors = c("#B95084","#8662C1", "#626CC1", "#F4CE67","#b2abd2", "#5e3c99","#87BDF7")
 
@@ -247,7 +247,7 @@ scale_fill_viridis_d() + labs(title = "Reaction v.s. Severity")
 ```
 
 2) Reaction v.s. Content
-The mosaic plots show clearly that the higher score, the "Discrimination" and "Finance" contributes more. In other words, the vignettes with contents related to discrimination and finance yield more high scores. From bar plots, under contents Health/Accident,  Home, Interpersonal Tension, Misc, and Work/Education, the counts of the score presents an approximate descending order(score 0 counts most, score 4 counts last). However, for contents Discrimination and Finance, the counts of score is relatively even or in an ascending order, that is the reason why this two contents contribute more in higher score. Another pattern we can find from mosaic plot is that the contribution of Health/Accident across the score basically stays same. 
+The mosaic plots show clearly that the higher score it is, the "Discrimination" and "Finance" contributes more. In other words, the vignettes with contents related to discrimination and finance yield more high scores in proportion. From bar plots, under contents Health/Accident,  Home, Interpersonal Tension, Misc, and Work/Education, the counts of the score presents an approximate descending order(score 0 counts most, score 4 counts last). However, for contents Discrimination and Finance, the counts of score is relatively even or in an ascending order, that is the reason why this two contents contribute more in higher score. Another pattern we can find from mosaic plot is that the contribution of Health/Accident across the score basically stays same. 
 
 ```{r echo=FALSE}
 vcd::mosaic(content~ score,v_content, direction = c("v","h"),
@@ -262,32 +262,32 @@ scale_fill_brewer(palette = "PuOr") + labs(title = "Reaction v.s. Content")
 
                                         #############################################
                                         
-We also would like to see how people's baseline condition may have impacts on people's reaction to stress. We have *sex assignment*, *household income*, *loneliness*, *relationship with a people's close ones* these four factors seleted. *sex assignment* is simply clustered as "Male" and "Female". Other three factors are seperated in 3 levels respectively. By doing parallel coordinate graph, our goal is to see if clustering patterns exist for each factor. The parallel columns state for each vignette, ordered from most severe to least severe(left are those stressful conditions that may lead to the most severe consequence, and right are those that may lead to the least severe consequence). From graphs below, the only clustering pattern we can see is from *sex assignment*. It shows that males are more likely to state that they are good at dealing with those stressful conditions that may lead to severe consequence. other three fatcors present no evident impact on people's reaction.
+We also would like to see how people's baseline condition may have impacts on people's reaction to stress. We have *sex assignment*, *household income*, *loneliness*, *relationship with a people's close ones* these four factors seleted. *sex assignment* is simply clustered as "Male" and "Female". Other three factors are seperated in 3 levels respectively. By doing parallel coordinate graph, our goal is to see if clustering patterns exist for each factor. The parallel columns state for each vignette, ordered from most severe to least severe(left are those stressful conditions that may lead to the most severe consequence, and right are those that may lead to the least severe consequence). For each people's score, we averaged the scores from stressed level and overwhelmed level, then took the average of records from 2 sessions. From graphs below, the only clustering pattern we can see is from *sex assignment*. It shows that males are more likely to state that they are good at dealing with those conditions with higher severity.And overally, females present to be more stressed then males. Other three fatcors present no evident impact on people's reaction.
 
 ```{r echo=FALSE}
 v_content %>% arrange(desc(severity)) %>%
   select(ID,Score,vignette,Household_income,sex_assignment,Relationship) %>%
   pivot_wider(names_from = vignette, values_from = Score) %>%
-  ggparcoord(columns = (5:60),scale = "globalminmax", alphaLines = 0.5,groupColumn = "sex_assignment") + 
-  scale_color_viridis(discrete=TRUE) + labs(title = "Grouped by Sex")
+  ggparcoord(columns = (5:60),scale = "globalminmax", alpha = 0.5,groupColumn = "sex_assignment",splineFactor = 10) + 
+  scale_color_manual(values = c("#F9A1B9","#6BAEFE")) + labs(title = "Grouped by Sex")+ theme(legend.position="bottom")+ theme(axis.text.x = element_text(size=5))
 
 v_content %>% arrange(desc(severity)) %>%
   select(ID,Score,vignette,Household_income,Relationship,Loneliness) %>%
   pivot_wider(names_from = vignette, values_from = Score) %>%
-  ggparcoord(columns = (5:60),scale = "globalminmax", alphaLines = 0.5,groupColumn = "Household_income") + 
-  scale_color_viridis(discrete=TRUE)+ labs(title = "Grouped by Household Income")
+  ggparcoord(columns = (5:60),scale = "globalminmax", alphaLines = 0.5,groupColumn = "Household_income",splineFactor = 10) + 
+  scale_color_viridis(discrete=TRUE)+ labs(title = "Grouped by Household Income")+ theme(legend.position="bottom")+ theme(axis.text.x = element_text(size=5))
 
 v_content %>% arrange(desc(severity)) %>%
   select(ID,Score,vignette,Household_income,Relationship,Loneliness) %>%
   pivot_wider(names_from = vignette, values_from = Score) %>%
-  ggparcoord(columns = (5:60),scale = "globalminmax", alphaLines = 0.5, groupColumn = "Loneliness") + 
-  scale_color_viridis(discrete=TRUE)+ labs(title = "Grouped by Lonliness")
+  ggparcoord(columns = (5:60),scale = "globalminmax", alphaLines = 0.5, groupColumn = "Loneliness",splineFactor = 10) + 
+  scale_color_viridis(discrete=TRUE)+ labs(title = "Grouped by Lonliness")+ theme(legend.position="bottom")+ theme(axis.text.x = element_text(size=5))
 
 v_content %>% arrange(desc(severity)) %>%
   select(ID,Score,vignette,Household_income,Relationship,sex_assignment) %>%
   pivot_wider(names_from = vignette, values_from = Score) %>%
-  ggparcoord(columns = (5:60),scale = "globalminmax", alphaLines = 0.5,groupColumn = "Relationship") + 
-  scale_color_viridis(discrete=TRUE)+ labs(title = "Relationship with Close Ones")
+  ggparcoord(columns = (5:60),scale = "globalminmax", alphaLines = 0.5,groupColumn = "Relationship",splineFactor = 10) + 
+  scale_color_viridis(discrete=TRUE)+ labs(title = "Relationship with Close Ones")+ theme(legend.position="bottom")+ theme(axis.text.x = element_text(size=5))
 
 ```
 
