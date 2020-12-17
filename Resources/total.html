@@ -1,31 +1,31 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Content Classification</title>
+    <title>Subjective Stress vs. Life Categories</title>
     <style>
       body {
         margin: auto;
-	      width: 650px;
-	      font: 12px arial;
+        width: 650px;
+        font: 12px arial;
       }
     </style>
     <script src="https://d3js.org/d3.v6.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.24.0/d3-legend.js"></script>
   </head>
   <body>
-    <h1> Content Classification of Vignettes </h1>
+    <h1>Subjective Stress vs. Life Categories</h1>
     <svg id="chart" width="650" height="400"></svg>
 
     Select session:
     <select id="session"></select>
 
     <input type="checkbox" id="sort" />
-    Sort by total
-
+    Sort by Total (Descending)
   </body>
 
   <script>
-    d3.csv(  'https://raw.githubusercontent.com/graceliudata/Stress-Perception-Decomposition/main/Data/DataTransformation.csv'
+    d3.csv(
+      'https://raw.githubusercontent.com/graceliudata/Stress-Perception-Decomposition/main/Data/DataTransformation.csv'
     ).then((d) => chart(d));
     function chart(csv) {
       console.log(csv);
@@ -46,7 +46,7 @@
         .text((d) => d);
 
       var svg = d3.select('#chart'),
-        margin = { top: 35, left: 35, bottom: 0, right: 0 },
+        margin = { top: 30, left: 55, bottom: 20, right: -15 },
         width =
           +svg.attr('width') - margin.left - margin.right,
         height =
@@ -54,7 +54,7 @@
 
       var x = d3
         .scaleBand()
-        .range([margin.left, width - margin.right-30])
+        .range([margin.left, width - margin.right - 100])
         .padding(0.1);
 
       var y = d3
@@ -81,19 +81,40 @@
           '#375F1B',
           '#66B032',
           '#9BD770',
-          '#EBF7E3'
+          '#EBF7E3',
         ])
         .domain(keys);
-      
-        svg.append("g")
-      .attr("class", "legendOrdinal")
- .attr("transform", "translate(600,120)");
-      
-    var legendOrdinal = d3.legendColor().ascending(true).title('Severity')
-    	.scale(z);
- 
-    svg.select(".legendOrdinal")
-	  	.call(legendOrdinal);
+
+      svg
+        .append('g')
+        .attr('class', 'legendOrdinal')
+        .attr('transform', 'translate(540,120)');
+
+      var legendOrdinal = d3
+        .legendColor()
+        .ascending(true)
+        .title('Subjective Stress')
+        .scale(z);
+
+      svg.select('.legendOrdinal').call(legendOrdinal);
+
+      svg
+        .append('text')
+        .attr('class', 'x-label')
+        .attr('text-anchor', 'end')
+        .attr('x', width - 280)
+        .attr('y', height + 20)
+        .text('Life Categories');
+
+      svg
+        .append('text')
+        .attr('class', 'y-label')
+        .attr('text-anchor', 'end')
+        .attr('x', -130)
+        .attr('y', 6)
+        .attr('dy', '.75em')
+        .attr('transform', 'rotate(-90)')
+        .text('Subjective Stress');
       update(d3.select('#session').property('value'), 0);
       function update(input, speed) {
         var data = csv.filter((f) => f.Session == input);
@@ -194,7 +215,7 @@
           )
           .attr('y', (d) => y(d.total) - 5)
           .text((d) => d.total);
-        }
+      }
 
       var select = d3
         .select('#session')
@@ -208,6 +229,5 @@
           update(select.property('value'), 750);
         });
     }
-
   </script>
 </html>
