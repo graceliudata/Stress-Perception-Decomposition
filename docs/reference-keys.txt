@@ -6,6 +6,7 @@ results
 examination-on-objective-coder-ratings
 stress-levels-on-different-objective-coder-ratings-severity-levels
 exploration-on-individual-factors
+investigation-on-the-relationship-between-number-of-siblings-and-subjective-stress
 potential-vignettes-outliers
 interactive-component
 conclusion
