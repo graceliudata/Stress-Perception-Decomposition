@@ -24,7 +24,7 @@
 <meta name="author" content="Hongling Liu, Megan Goldring, Xinrui Zhang and Yuxin Zhou" />
 
 
-<meta name="date" content="2020-12-16" />
+<meta name="date" content="2020-12-17" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -140,18 +140,22 @@ This is quite reasonable since these variables are used to store the explanation
 ## focus5                          18   9
 ## focus6                          18   9</code></pre>
 <p>For row patterns, with each row represents a student survey results, we found that there were 17 out of 201 students that only fill out a few of survey question and then quit. In fact, we decide to remove those who did not fill out at least 75% of the survey for data cleaning.</p>
-<pre><code>##   [1]   4   4   4   6   5   4   5   4   4   4   4   4   4   4   4   5   5   4   4   4   4   4   4   3 179   6
-##  [27] 180   4   4   4   5 178   5   5   7   5   5   4   7   5   5   5   5   5   5   5   6 178   6   6   5   5
-##  [53]   5   5   6   5   4   6   5   7   6   5   5   5   5   6   5   5   8   5   7   5 179   3   3   6  75   3
-##  [79]   3   3   6   3   3   3   3   3 180   3 179   3   3   3   3   3   3   4   3   3 178 178   3   4   3   4
-## [105] 165   3   3   3   3   3   3   3   3   3   3 179   3   3 180   2   3   3   4   3   3   3   3   4   3   3
-## [131]   6 178   8   3   3 154   3   3   5 178   3   4   3   3   3   3   4   3   4   4   3   5   3   3   3   3
-## [157]   3   2   3   3   3   5   5   3   3   4   3   3   3   3 179   3   3   3   1   4   3   4   6   3   3   5
-## [183]   3   3   3   3   3   4 180   4   3   4   4   3   4   3   4   3   4   4   4</code></pre>
+<pre><code>##   [1]   4   4   4   6   5   4   5   4   4   4   4   4   4   4   4   5   5   4
+##  [19]   4   4   4   4   4   3 179   6 180   4   4   4   5 178   5   5   7   5
+##  [37]   5   4   7   5   5   5   5   5   5   5   6 178   6   6   5   5   5   5
+##  [55]   6   5   4   6   5   7   6   5   5   5   5   6   5   5   8   5   7   5
+##  [73] 179   3   3   6  75   3   3   3   6   3   3   3   3   3 180   3 179   3
+##  [91]   3   3   3   3   3   4   3   3 178 178   3   4   3   4 165   3   3   3
+## [109]   3   3   3   3   3   3   3 179   3   3 180   2   3   3   4   3   3   3
+## [127]   3   4   3   3   6 178   8   3   3 154   3   3   5 178   3   4   3   3
+## [145]   3   3   4   3   4   4   3   5   3   3   3   3   3   2   3   3   3   5
+## [163]   5   3   3   4   3   3   3   3 179   3   3   3   1   4   3   4   6   3
+## [181]   3   5   3   3   3   3   3   4 180   4   3   4   4   3   4   3   4   3
+## [199]   4   4   4</code></pre>
 <p>Here is a heatmap for row/column missing pattern, where x-axis for columns (survey questions), y-axis for row index (id for students)
 1.While yellow cells indicates missing data, we can see patterns of 3 vertical yellow lines (top 3 variables with missing values) and 17 horizontal yellow lines (17 students miss more than 75% questions)
 2.There is another pattern that students with id 31-73 have missing values for variable father_education and mother_education.</p>
-<p><img src="finalproj_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><img src="finalproj_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 
 </div>
             </section>

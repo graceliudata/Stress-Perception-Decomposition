@@ -237,14 +237,22 @@ The vignettes are designed with different severity. The termiology "severity" me
 1) Reaction v.s. Severity
 From mosaic plot, we can see higher severity contributes more to the higher score, that is, the vignette with higher severity yield more high scores in proportion. From the bar plot, we can see an approximate "V" shape. With lower severity(1-3), the counts of scores is in an approximate descending order(score 0 counts most, score 4 counts least). With higher severity(3-4), the counts of scores is in an approximate ascending order(score 0 counts least, score 4 counts most). The bar plot can explain the proportion pattern presents in the mosaic plot consistently.
 ```{r echo=FALSE}
-colors = c("#B95084","#8662C1", "#626CC1", "#F4CE67","#b2abd2", "#5e3c99","#87BDF7")
+colors = c('#EBF7E3',
+          '#9BD770',
+          '#66B032',
+          '#375F1B',
+          '#1B3409')
 
 vcd::mosaic(severity~ score,v_content, direction = c("v","h"),
-           highlighting_fill = viridis, main = "Reaction v.s. Severity")
+           highlighting_fill = colors, labeling_args = list(set_varnames = c(score="Subjective Stress", severity="Objective Stress")),main = "Subjective Stress v.s. Objective Stress")
 v_content %>% group_by(score,severity) %>% summarise(Counts = n()) %>% ungroup() %>%
 ggplot(aes(x = severity, y = Counts,fill =  score)) +
 geom_bar(position = "dodge", stat = "identity",color = "#5D5F80") +
-scale_fill_viridis_d() + labs(title = "Reaction v.s. Severity")
+scale_fill_viridis_d() + scale_fill_manual(values = c('#EBF7E3',
+          '#9BD770',
+          '#66B032',
+          '#375F1B',
+          '#1B3409')) +labs(title = "Reaction v.s. Severity")
 ```
 
 2) Reaction v.s. Content
