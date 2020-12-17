@@ -251,14 +251,23 @@ scale_fill_viridis_d() + labs(title = "Reaction v.s. Severity")
 The mosaic plots show clearly that the higher score it is, the "Discrimination" and "Finance" contributes more. In other words, the vignettes with contents related to discrimination and finance yield more high scores in proportion. From bar plots, under contents Health/Accident,  Home, Interpersonal Tension, Misc, and Work/Education, the counts of the score presents an approximate descending order(score 0 counts most, score 4 counts last). However, for contents Discrimination and Finance, the counts of score is relatively even or in an ascending order, that is the reason why this two contents contribute more in higher score. Another pattern we can find from mosaic plot is that the contribution of Health/Accident across the score basically stays same. 
 
 ```{r echo=FALSE}
-vcd::mosaic(content~ score,v_content, direction = c("v","h"),
-            highlighting_fill = brewer.pal(n = 7, name = "PuOr"),rot_labels=c(0,90,0,0),gp_labels = gpar(fontsize = 7),
-            main = "Reaction v.s. Content")
+colors = c('#EBF7E3',
+          '#9BD770',
+          '#66B032',
+          '#375F1B',
+          '#1B3409')
+vcd::mosaic(score~ content,v_content, direction = c("v","h"),
+           highlighting_fill = colors,rot_labels=c(15,0,0,0),gp_labels = gpar(fontsize = 7),labeling_args = list(set_varnames = c(score="Subjective Stress", content="Life Categories")),
+            main = "Subjective Stress v.s. Life Categories")
 
 v_content %>% group_by(score,content) %>% summarise(Counts = n()) %>% ungroup() %>%
 ggplot(aes(x = content, y = Counts,fill =  score)) +
 geom_bar(position = "dodge", stat = "identity",color = "#5D5F80") +
-scale_fill_brewer(palette = "PuOr") + labs(title = "Reaction v.s. Content")
+scale_fill_manual(values = c('#EBF7E3',
+          '#9BD770',
+          '#66B032',
+          '#375F1B',
+          '#1B3409')) + labs(title = "Subjective Stress v.s. Life Categories", x= "Life Categories", fill = "Subjtctive Stress")+ theme(legend.position="bottom")
 ```
 
 ## Exploration on Individual Factors 
@@ -270,25 +279,25 @@ v_content %>% arrange(desc(severity)) %>%
   select(ID,Score,vignette,Household_income,sex_assignment,Relationship) %>%
   pivot_wider(names_from = vignette, values_from = Score) %>%
   ggparcoord(columns = (5:60),scale = "globalminmax", alpha = 0.5,groupColumn = "sex_assignment",splineFactor = 10) + 
-  scale_color_manual(values = c("#fe9c8f","#84c1ff")) + labs(title = "Grouped by Sex")+ theme(legend.position="bottom")+ theme(axis.text.x = element_text(size=5))
+  scale_color_manual(values = c("#A7414A","#6BAEFE")) + labs(title = "Grouped by Sex")+ theme(legend.position="bottom")+ theme(axis.text.x = element_text(size=5)) + labs(x = "ID", y = "Subjective Stress")
 
 v_content %>% arrange(desc(severity)) %>%
   select(ID,Score,vignette,Household_income,Relationship,Loneliness) %>%
   pivot_wider(names_from = vignette, values_from = Score) %>%
   ggparcoord(columns = (5:60),scale = "globalminmax", alphaLines = 0.5,groupColumn = "Household_income",splineFactor = 10) + 
-  scale_color_viridis(discrete=TRUE)+ labs(title = "Grouped by Household Income")+ theme(legend.position="bottom")+ theme(axis.text.x = element_text(size=5))
+  scale_color_viridis(discrete=TRUE)+ labs(title = "Grouped by Household Income")+ theme(legend.position="bottom")+ theme(axis.text.x = element_text(size=5))+ labs(x = "ID", y = "Subjective Stress")
 
 v_content %>% arrange(desc(severity)) %>%
   select(ID,Score,vignette,Household_income,Relationship,Loneliness) %>%
   pivot_wider(names_from = vignette, values_from = Score) %>%
   ggparcoord(columns = (5:60),scale = "globalminmax", alphaLines = 0.5, groupColumn = "Loneliness",splineFactor = 10) + 
-  scale_color_viridis(discrete=TRUE)+ labs(title = "Grouped by Lonliness")+ theme(legend.position="bottom")+ theme(axis.text.x = element_text(size=5))
+  scale_color_viridis(discrete=TRUE)+ labs(title = "Grouped by Lonliness")+ theme(legend.position="bottom")+ theme(axis.text.x = element_text(size=5))+ labs(x = "ID", y = "Subjective Stress")
 
 v_content %>% arrange(desc(severity)) %>%
   select(ID,Score,vignette,Household_income,Relationship,sex_assignment) %>%
   pivot_wider(names_from = vignette, values_from = Score) %>%
   ggparcoord(columns = (5:60),scale = "globalminmax", alphaLines = 0.5,groupColumn = "Relationship",splineFactor = 10) + 
-  scale_color_viridis(discrete=TRUE)+ labs(title = "Relationship with Close Ones")+ theme(legend.position="bottom")+ theme(axis.text.x = element_text(size=5))
+  scale_color_viridis(discrete=TRUE)+ labs(title = "Relationship with Close Ones")+ theme(legend.position="bottom")+ theme(axis.text.x = element_text(size=5))+ labs(x = "ID", y = "Subjective Stress")
 
 ```
 
