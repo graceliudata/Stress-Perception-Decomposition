@@ -75,18 +75,27 @@ subj1$severity <- as.factor(subj1$severity) #change to class factor
 #stressed
 ggplot(subj1, aes(x = stressed, y = vid, fill = severity)) + 
   geom_density_ridges(stat="binline")+
+  xlab("Subjective Stress")+
+  ylab("Vignette ID")+
+  labs(fill = "Objective Stress")+
   ggtitle("Session 1 - Stressed")+
   theme_ridges()+ theme(axis.text.y = element_text(size=5))+ theme(legend.position="bottom")
 
 #overwhelmed 
 ggplot(subj1, aes(x = overwhelmed, y = vid, fill = severity)) + 
   geom_density_ridges(stat="binline")+
+  xlab("Subjective Stress")+
+  ylab("Vignette ID")+
+  labs(fill = "Objective Stress")+
   ggtitle("Session 1 - Overwhelmed")+
   theme_ridges()+ theme(axis.text.y = element_text(size=5))+ theme(legend.position="bottom")
 
 #aggregate
 ggplot(subj1, aes(x = agg_stress, y = vid, fill = severity)) + 
   geom_density_ridges(stat="binline")+
+  xlab("Subjective Stress")+
+  ylab("Vignette ID")+
+  labs(fill = "Objective Stress")+
   ggtitle("Session 1 - Aggregate of Stressed and Overwhelmed")+
   theme_ridges()+ theme(axis.text.y = element_text(size=5))+ theme(legend.position="bottom")
 
@@ -128,23 +137,32 @@ subj2$severity <- as.factor(subj2$severity) #change to class factor
 #stressed
 ggplot(subj2, aes(x = stressed, y = vid, fill = severity)) + 
   geom_density_ridges(stat="binline")+
+  xlab("Subjective Stress")+
+  ylab("Vignette ID")+
+  labs(fill = "Objective Stress")+
   ggtitle("Session 2 - Stressed")+
   theme_ridges()+ theme(axis.text.y = element_text(size=5))+ theme(legend.position="bottom")
 
 #overwhelmed 
 ggplot(subj2, aes(x = overwhelmed, y = vid, fill = severity)) + 
-  geom_density_ridges(stat="binline")+
+  geom_density_ridges(stat="binline")+ 
+  xlab("Subjective Stress")+
+  ylab("Vignette ID")+
+  labs(fill = "Objective Stress")+
   ggtitle("Session 2 - Overwhelmed")+
   theme_ridges()+ theme(axis.text.y = element_text(size=5))+ theme(legend.position="bottom")
 
 #aggregate
 ggplot(subj2, aes(x = agg_stress, y = vid, fill = severity)) + 
   geom_density_ridges(stat="binline")+
+  xlab("Subjective Stress")+
+  ylab("Vignette ID")+
+  labs(fill = "Objective Stress")+
   ggtitle("Session 2 - Aggregate of Stressed and Overwhelmed")+
   theme_ridges()+ theme(axis.text.y = element_text(size=5))+ theme(legend.position="bottom")
 ```
 
-We have several key takeaways from these visualizations. All discussion refers to all three ways of operationalizing stress: how 'stressed', how 'overwhelmed', and the aggregate of 'stressed' and 'overwhelmed' that paticipants reported. 
+We have several key takeaways from these visualizations. All discussion refers to all three ways of operationalizing stress: how 'stressed', how 'overwhelmed', and the aggregate of 'stressed' and 'overwhelmed' that participants reported. 
 
 First, we see that participants generally report that they would be less stressed than expected by the objective coding scheme; many participants rate scenarios that are objectively a '1' as a '0', those that are objectively a '2' as a '1', and so on. However, the under-reporting is most severe for the low-range objective stressors (the 1's and 2's). At the same time, we do see the expected general increase in mean subjective ratings of stress across the objective range, with more objectively severe stressors being rated as more subjectively stressors. 
 
@@ -232,31 +250,8 @@ v_content$severity <-as.factor(v_content$severity)
 v_content$Loneliness <- as.factor(v_content$Loneliness)
 
 ```
-The vignettes are designed with different severity. The termiology "severity" means how sever the potential consequence resulted from the conditions described in the vignettes may be.The severity is leveled into 4 levels, where 0 indicates the least severe and 4 stands for the most severe. Also, the vignettes are designed with different contents that are categorized into 7 categories: *Discrimination*,*Finances*,*Health/Accident*, *Home*, *Interpersonal Tension*, *Misc*, *Work/Education*. We want to see how people react under different "Severity" and different contents.
 
-1) Reaction v.s. Severity
-From mosaic plot, we can see higher severity contributes more to the higher score, that is, the vignette with higher severity yield more high scores in proportion. From the bar plot, we can see an approximate "V" shape. With lower severity(1-3), the counts of scores is in an approximate descending order(score 0 counts most, score 4 counts least). With higher severity(3-4), the counts of scores is in an approximate ascending order(score 0 counts least, score 4 counts most). The bar plot can explain the proportion pattern presents in the mosaic plot consistently.
-```{r echo=FALSE}
-colors = c('#EBF7E3',
-          '#9BD770',
-          '#66B032',
-          '#375F1B',
-          '#1B3409')
-
-vcd::mosaic(severity~ score,v_content, direction = c("v","h"),
-           highlighting_fill = colors, labeling_args = list(set_varnames = c(score="Subjective Stress", severity="Objective Stress")),main = "Subjective Stress v.s. Objective Stress")
-v_content %>% group_by(score,severity) %>% summarise(Counts = n()) %>% ungroup() %>%
-ggplot(aes(x = severity, y = Counts,fill =  score)) +
-geom_bar(position = "dodge", stat = "identity",color = "#5D5F80") +
-scale_fill_viridis_d() + scale_fill_manual(values = c('#EBF7E3',
-          '#9BD770',
-          '#66B032',
-          '#375F1B',
-          '#1B3409')) +labs(title = "Reaction v.s. Severity")
-```
-
-2) Reaction v.s. Content
-The mosaic plots show clearly that the higher score it is, the "Discrimination" and "Finance" contributes more. In other words, the vignettes with contents related to discrimination and finance yield more high scores in proportion. From bar plots, under contents Health/Accident,  Home, Interpersonal Tension, Misc, and Work/Education, the counts of the score presents an approximate descending order(score 0 counts most, score 4 counts last). However, for contents Discrimination and Finance, the counts of score is relatively even or in an ascending order, that is the reason why this two contents contribute more in higher score. Another pattern we can find from mosaic plot is that the contribution of Health/Accident across the score basically stays same. 
+The vignettes are designed with different objective code ratings. The terminology "Objective Stress" represents how severe the potential consequence resulted from the conditions described in the vignettes may be.The Objective Stress is leveled into 4 levels, where 0 indicates the least severity and 4 stands for the most severity. Also, the vignettes are designed with different contents that are categorized into 7 categories: *Discrimination*,*Finances*,*Health/Accident*, *Home*, *Interpersonal Tension*, *Misc*, *Work/Education*. We want to see how people react with different contents in different level of Objective Stress.
 
 ```{r echo=FALSE}
 colors = c('#EBF7E3',
@@ -278,9 +273,11 @@ scale_fill_manual(values = c('#EBF7E3',
           '#1B3409')) + labs(title = "Subjective Stress v.s. Life Categories", x= "Life Categories", fill = "Subjtctive Stress")+ theme(legend.position="bottom")
 ```
 
+The mosaic plots indicated that within the *Discrimination* and *Finance* categories, there are larger percentage of people with high level of stress. From the bar plot, under contents *Health/Accident*, *Home*, *Interpersonal Tension*, *Misc*, and *Work/Education*, the counts of the score presents an approximate descending order(score 0 counts most, score 4 counts last). However, for contents *Discrimination* and *Finance*, the counts of score is relatively even or in an ascending order, that is the reason why we can conclude that there are larger percentage of people with high level of stress within the *Discrimination* and *Finance* categories.
+
 ## Exploration on Individual Factors 
                                         
-We also would like to see how people's baseline condition may have impacts on people's reaction to stress. We have *sex assignment*, *household income*, *loneliness*, *relationship with a people's close ones* these four factors seleted. *sex assignment* is simply clustered as "Male" and "Female". Other three factors are seperated in 3 levels respectively. By doing parallel coordinate graph, our goal is to see if clustering patterns exist for each factor. The parallel columns state for each vignette, ordered from most severe to least severe(left are those stressful conditions that may lead to the most severe consequence, and right are those that may lead to the least severe consequence). For each people's score, we averaged the scores from stressed level and overwhelmed level, then took the average of records from 2 sessions. From graphs below, the only clustering pattern we can see is from *sex assignment*. It shows that males are more likely to state that they are good at dealing with those conditions with higher severity.And overally, females present to be more stressed then males. Other three fatcors present no evident impact on people's reaction.
+We also would like to see how people's baseline condition may have impacts on people's reaction to stress. We have *sex assignment*, *household income*, *loneliness*, *relationship with a people's close ones* these four factors selected. *sex assignment* is simply clustered as "Male" and "Female". Other three factors are separated in 3 levels respectively. By doing parallel coordinate graph, our goal is to see if clustering patterns exist for each factor. The parallel columns state for each vignette, ordered from most severe to least severe(left are those stressful conditions that may lead to the most severe consequence, and right are those that may lead to the least severe consequence). For each people's score, we averaged the scores from stressed level and overwhelmed level, then took the average of records from 2 sessions. From graphs below, the only clustering pattern we can see is from *sex assignment*. It shows that males are more likely to state that they are good at dealing with those conditions with higher severity.And overall, females present to be more stressed then males. Other three factors present no evident impact on people's reaction.
 
 ```{r echo=FALSE}
 v_content %>% arrange(desc(severity)) %>%
@@ -308,6 +305,67 @@ v_content %>% arrange(desc(severity)) %>%
   scale_color_viridis(discrete=TRUE)+ labs(title = "Relationship with Close Ones")+ theme(legend.position="bottom")+ theme(axis.text.x = element_text(size=5))+ labs(x = "ID", y = "Subjective Stress")
 
 ```
+
+## Investigation on the relationship between Number of Siblings and Subjective Stress
+
+To dive deep into what may cause the different levels of subjective stress, we decided to take a look at how the number of siblings may affect students' stress levels in different life categories. Since we have less than five percent of people with 4 or more siblings, we decided to conclude the data based on four categories, each with "0", "1","2","3+" siblings.
+
+```{r}
+subj <- readRDS("Data/vignette_dat.RDS")
+el <- which(subj$ID == 130)
+subj <- subj[-el,]
+obj <- read.csv("Data/objective codes.csv")
+obj <- obj[,c(1,3,4,9)]
+colnames(obj) <- c("vid","broad","content","severity")
+regexp <- "[[:digit:]]+"
+subj$vid <- as.numeric(str_extract(subj$vignette, regexp))
+
+subj <- merge(x = subj, y = obj, by = "vid", all.x = TRUE)
+subj <- merge(x = subj, y = Baseline, by.x = "ID",by.y="sid", all.x = TRUE)
+subj <- subj[,c(1,2,3,4,5,6,7,8,189)]
+subj$sibling_age <- tolower(subj$sibling_age)
+subj["sibling_count"] <- 0
+
+subj$sibling_count <- str_count(subj$sibling_age, '\\d+')
+#substract 'me','only child' as 1
+subj$sibling_count<-ifelse(grepl('me', subj$sibling_age),subj$sibling_count-1,subj$sibling_count)
+subj$sibling_count<-ifelse(grepl('only child', subj$sibling_age),0,subj$sibling_count)
+
+subj$content[subj$content == 1] <- "Interpersonal Tension"
+subj$content[subj$content == 2] <- "Work/Education"
+subj$content[subj$content == 3] <- "Home"
+subj$content[subj$content == 4] <- "Finances"
+subj$content[subj$content == 5] <- "Health/Accident"
+subj$content[subj$content == 6] <- "Discrimination"
+subj$content[subj$content == 7] <- "Misc"
+
+subj$score <- as.numeric(subj$score)
+subj <- subj[!is.na(subj$content),]
+subj <- subj[!is.na(subj$score),]
+subj$sibling_count[is.na(subj$sibling_count)] <- 0
+subj["sibnum"] <- ""
+subj$sibnum<-ifelse(subj$sibling_count==0,"0",subj$sibnum)
+subj$sibnum<-ifelse(subj$sibling_count==1,"1",subj$sibnum)
+subj$sibnum<-ifelse(subj$sibling_count==2,"2",subj$sibnum)
+subj$sibnum<-ifelse(subj$sibling_count>=3,"3+",subj$sibnum)
+
+temp = subj %>% group_by(content,Session,sibnum)%>% mutate(Score = mean(score))
+
+ggplot(temp, aes(x=factor(sibnum),y=Score,group=Session,colour=Session)) +geom_point()+geom_line()+facet_wrap(~content)+xlab("Number of Siblings")+ylab("Subjective Stress")+ggtitle("Subjective Stress vs. Number of Slibings, faceted by Life Categories")
+
+```
+
+Based on our graph, we could a few really interesting foundings:
+
+1. Overall, we could observe a slight drop of stress level from Session 1 to Session 2, which may be caused by the time periods when the surveys were conducted. We also see an overall trend, where there is an increase of subjective stress when the the number of siblings increases from "1" to "2", and then an relatively bigger decline of subjective stress for students with 3+ siblings, especially on categories such that *Discrimination* and *Interpersonal Tension*. We suspect the reason behind this trend may be that students with more siblings receive less expectations from their parents, and they receive more love , support and care from all of their family members, where do not need to worry about finding new friends and they are more comfortable with themselves and less conscious of their beings. 
+
+1. For scenarios with *Discrimination* problems, when number of siblings increase to 3 and more, we can see an apparent tendency that people start to feel less stress. We suspect that it may cause by the shared consciousness and understanding we own with more siblings.
+
+2. For scenarios with *Interpersonal Tension* problem, we can see an extreme decline in the level of subjective stress when the number of siblings is more than 3. We suspect that this is due to the fact that students with more siblings may know better on how to communicate and negotiate with their friends since they have had their "practice" with their siblings, so they feel less stressed about it.
+
+2. For scenarios with *Finances* problems, we thought there will be large increase of stress level for people have more siblings due to more family burden. However, there is actually a drop of stress level, especially for session 2. 
+
+3. For scenarios with *Health/Accident* problems, we can see a clear decrease of stress level for both sessions when people have more siblings. We suspect that maybe this is because when you have more siblings, there will be more people care about your health problems and help you overcome any accidents, thus making people feel less stress.
 
 
 ## Potential Vignettes Outliers
