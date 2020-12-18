@@ -80,7 +80,8 @@ ggplot(subj1, aes(x = stressed, y = vid, fill = severity)) +
   xlab("Subjective Stress")+
   ylab("Vignette ID")+
   labs(fill = "Objective Stress")+
-  scale_fill_manual(values=c("cadetblue3", "khaki", "mediumorchid2", "snow4","springgreen4", "saddlebrown"))+ theme(axis.text.y = element_text(size=5))+ theme(legend.position="bottom")
+  scale_fill_manual(values=c("cadetblue3", "khaki", "mediumorchid2", "snow4","springgreen4", "saddlebrown"))+
+  theme_ridges(center = TRUE)+ theme(axis.text.y = element_text(size=5))+ theme(legend.position="bottom")
 
 #overwhelmed 
 ggplot(subj1, aes(x = overwhelmed, y = vid, fill = severity)) + 
@@ -89,7 +90,8 @@ ggplot(subj1, aes(x = overwhelmed, y = vid, fill = severity)) +
   xlab("Subjective Overwhelmed")+
   ylab("Vignette ID")+
   labs(fill = "Objective Stress")+
-  scale_fill_manual(values=c("cadetblue3", "khaki", "mediumorchid2", "snow4","springgreen4", "saddlebrown"))+ theme(axis.text.y = element_text(size=5))+ theme(legend.position="bottom")
+  scale_fill_manual(values=c("cadetblue3", "khaki", "mediumorchid2", "snow4","springgreen4", "saddlebrown"))+
+  theme_ridges(center = TRUE)+ theme(axis.text.y = element_text(size=5))+ theme(legend.position="bottom")
 
 #aggregate
 ggplot(subj1, aes(x = agg_stress, y = vid, fill = severity)) + 
@@ -98,7 +100,8 @@ ggplot(subj1, aes(x = agg_stress, y = vid, fill = severity)) +
   xlab("Subjective Stress")+
   ylab("Vignette ID")+
   labs(fill = "Objective Stress")+
-  scale_fill_manual(values=c("cadetblue3", "khaki", "mediumorchid2", "snow4","springgreen4", "saddlebrown"))+ theme(axis.text.y = element_text(size=5))+ theme(legend.position="bottom")
+  scale_fill_manual(values=c("cadetblue3", "khaki", "mediumorchid2", "snow4","springgreen4", "saddlebrown"))+
+  theme_ridges(center = TRUE)+ theme(axis.text.y = element_text(size=5))+ theme(legend.position="bottom")
 
 #SESSION 2
 #subset and generate aggregate stressed score (aggregate of stressed and overwhelmed)
@@ -142,7 +145,8 @@ ggplot(subj2, aes(x = stressed, y = vid, fill = severity)) +
   xlab("Subjective Stress")+
   ylab("Vignette ID")+
   labs(fill = "Objective Stress")+
-  scale_fill_manual(values=c("cadetblue3", "khaki", "mediumorchid2", "snow4","springgreen4", "saddlebrown"))+ theme(axis.text.y = element_text(size=5))+ theme(legend.position="bottom")
+  scale_fill_manual(values=c("cadetblue3", "khaki", "mediumorchid2", "snow4","springgreen4", "saddlebrown"))+
+  theme_ridges(center = TRUE)+ theme(axis.text.y = element_text(size=5))+ theme(legend.position="bottom")
 
 #overwhelmed 
 ggplot(subj2, aes(x = overwhelmed, y = vid, fill = severity))+ 
@@ -151,7 +155,8 @@ ggplot(subj2, aes(x = overwhelmed, y = vid, fill = severity))+
   xlab("Subjective Stress")+
   ylab("Vignette ID")+
   labs(fill = "Objective Stress")+
-  scale_fill_manual(values=c("cadetblue3", "khaki", "mediumorchid2", "snow4","springgreen4", "saddlebrown"))+ theme(axis.text.y = element_text(size=5))+ theme(legend.position="bottom")
+  scale_fill_manual(values=c("cadetblue3", "khaki", "mediumorchid2", "snow4","springgreen4", "saddlebrown"))+
+  theme_ridges(center = TRUE)+ theme(axis.text.y = element_text(size=5))+ theme(legend.position="bottom")
 
 #aggregate
 ggplot(subj2, aes(x = agg_stress, y = vid, fill = severity)) + 
@@ -160,7 +165,8 @@ ggplot(subj2, aes(x = agg_stress, y = vid, fill = severity)) +
   xlab("Subjective Stress")+
   ylab("Vignette ID")+
   labs(fill = "Objective Stress")+
-  scale_fill_manual(values=c("cadetblue3", "khaki", "mediumorchid2", "snow4","springgreen4", "saddlebrown"))+ theme(axis.text.y = element_text(size=5))+ theme(legend.position="bottom")
+  scale_fill_manual(values=c("cadetblue3", "khaki", "mediumorchid2", "snow4","springgreen4", "saddlebrown"))+
+  theme_ridges(center = TRUE)+ theme(axis.text.y = element_text(size=5))+ theme(legend.position="bottom")
 ```
 
 We have several key takeaways from these visualizations. All discussion refers to all three ways of operationalizing stress: how 'stressed', how 'overwhelmed', and the aggregate of how 'stressed' and 'overwhelmed' reported by the participants. 
