@@ -20,7 +20,7 @@ Baseline <- read_csv("Data/Baseline.csv")
 Our data missing analysis involves 3 data sets: Mood data, Vignette data, and Baseline data. For all visualizations, we confirmed that they are suitible for all types of color blindess: protanomaly, deuteranomaly, tritanomaly, protanopia, deuteranopia, tritanopia, and blue cone monochromacy to effectively read the graph. We confirmed that the visual is accessible to these individuals by plugging our images into https://www.color-blindness.com/coblis-color-blindness-simulator/ and looking at it in all color blind modes.
 
 ## Mood Data 
-There were no missing values for the mood data
+There were no missing values for the mood data.
 ```{r}
 freq.na(poms_dat) 
 ```
