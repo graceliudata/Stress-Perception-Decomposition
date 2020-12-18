@@ -366,7 +366,7 @@ ggplot(temp, aes(x=factor(sibnum),y=Score,group=Session,colour=Session))+
   facet_wrap(~domain)+
   xlab("Number of Siblings")+
   ylab("Subjective Stress")+
-  scale_color_manual(values=c("cadetblue3", "mediumorchid2"))+
+  scale_color_manual(values=c("springgreen4", "mediumorchid2"))+
   ggtitle("Subjective Stress vs. Number of Slibings, faceted by Life Categories")+
   theme(legend.position="bottom")
 
