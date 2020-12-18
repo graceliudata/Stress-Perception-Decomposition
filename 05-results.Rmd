@@ -24,7 +24,7 @@ We were also interested in investing whether variance in subjective reports depe
 
 In the plots below, the x-axis is subjective ratings of stressed, overwhelmed, and the aggregate and the y-axis is the ID number for the vignettes. The y-axis is ordered such that vignettes at the top are the most objectively severe scenarios (4=extremely stressful) and decrease down the axis to the bottom, which contains vignettes rated as least objectively severe (0=not at all stressful). The objective severity of the scenarios is also color-coded, as depicted in a legend to the right of the plots. 
 
-Note that we also ensured that our visualization would allow individuals with protanomaly, deuteranomaly, tritanomaly, protanopia, deuteranopia, tritanopia, and blue cone monochromacy to effectively read the graph. We confirmed that the visual is accessible to these individuals by plugging our images into https://www.color-blindness.com/coblis-color-blindness-simulator/ and looking at it in all color blind modes. Although the color palette is not the pretiest, it is one that is accessible to all types of color blindness other than monochromacy because there is no way to use a colored visualization that will work for individuals with that kind of color blindess. In sum, we developed our own color palette that is as inclusive as possible.
+Note that we also ensured that our visualization would allow individuals with protanomaly, deuteranomaly, tritanomaly, protanopia, deuteranopia, tritanopia, and blue cone monochromacy to effectively read the graph. We confirmed that the visual is accessible to these individuals by plugging our images into https://www.color-blindness.com/coblis-color-blindness-simulator/ and looking at it in all color blind modes. Although the color palette is not the prettiest, it is one that is accessible to all types of color blindness other than monochromacy because there is no way to use a colored visualization that will work for individuals with that kind of color blindness. In sum, we developed our own color palette that is as inclusive as possible.
 
 ```{r, message=FALSE, results = FALSE}
 #read in subjective ratings of vignettes
@@ -259,6 +259,7 @@ v_domain$severity <-as.factor(v_domain$severity)
 v_domain$Loneliness <- as.factor(v_domain$Loneliness)
 
 ```
+
 Another primary question was whether different life domains elicit relatively more or less stress. As coded by the two objective DISE coders, there were seven life domains: Discrimination events, Financial events, Interpersonal Tesnsion events, Work/Education events, Health/Accident Events, and Miscellaneous events. We chose to make a mosaic plot so that we could see the propotion of events in each domain as well as the relative amount of stress in each domain. 
 
 Once again, we ensured that these visualizations were color-blind accessible. However, this time we simply used different shades of green and plugged the mosaic into the color blind website sited above and ensured that individuals with all types of color blindness could read them. 
@@ -278,7 +279,8 @@ The mosaic plot reveals several interesting trends. First, we see that there wer
 
 ## Subjective Stress and Individual Difference Factors 
                                         
-Next, we investigate how people's baseline condition may impact their reactions to stressors. Data was collected on *sex assignment*, *household income*, *loneliness*, and *relationship with a people's close ones*. Our goal was to use parallel coordinate plots to investigate clustering patterns for each individual difference factor. *Sex assignment* is simply clustered as "Male" and "Female". The other three factors are separated in 3 levels. In these graphs, the parallel axes are ordered from objectively most severe to objectively least severe (i.e. those events rated as most stressful by the DISE coders are on the left, descending to the least stressful rated by objective coders on the right). For subjective stress, we averaged the scores from self reported 'stressed' and self reported 'overwhelmed'. Once again, we used color-blind appropriate colors using the color palette we designed ourselves
+Next, we investigate how people's baseline condition may impact their reactions to stressors. Data was collected on *sex assignment*, *household income*, *loneliness*, and *relationship with a people's close ones*. Our goal was to use parallel coordinate plots to investigate clustering patterns for each individual difference factor. *Sex assignment* is simply clustered as "Male" and "Female". The other three factors are separated in 3 levels. In these graphs, the parallel axes are ordered from objectively most severe to objectively least severe (i.e. those events rated as most stressful by the DISE coders are on the left, descending to the least stressful rated by objective coders on the right). For subjective stress, we averaged the scores from self reported 'stressed' and self reported 'overwhelmed'. Once again, we used color-blind appropriate colors using the color palette we designed ourselves.
+
 ```{r echo=FALSE}
 v_domain %>% arrange(desc(severity)) %>%
   select(ID,Score,vignette,Household_income,sex_assignment,Relationship) %>%
@@ -305,10 +307,13 @@ v_domain %>% arrange(desc(severity)) %>%
   scale_color_manual(values = c("cadetblue3", "mediumorchid2", "khaki"))+ labs(title = "Relationship with Close Ones")+ theme(legend.position="bottom")+ theme(axis.text.x = element_text(size=5))+ labs(x = "Vignette ID - Ordered from Most to Least Objectively Stressful", y = "Subjective Stress")
 
 ```
+
 One main takeaway from these visualizations is that vignettes objectively coded as more stressful (those on the left) incited higher subjective stress reactions than those objectively coded as less stressful (those on the right) We found less interesting trends along individual difference factors than expected. The only noticable clustering pattern we see is the one with *sex assignment*. It shows that males are more likely to state that they are less responsive than women in those vignettes with higher objective stress. And overall, females present more subjective stress than males. Other three fatcors present no evident impact on people's subjective ratings. This is interesting in it's own right, as psychological theory would predict that lower income people are consistently more reactive, that lonely people would be consistently more reactive, and that those with more close relationships would be less reactive. 
 
 ## Subjective Stress in the 1st Versus 2nd Session and the Relation Between Number of Siblings and Subjective Stress
+
 An old area of psychological research associates birth order with stress reactivity. Although not an active area of research before, early findings suggested that those with more siblings should be generally less stress reactive than those with few siblings. To reinvigorate these areas of study, we investigated how the number of siblings may affect students' stress levels in different life domains Since we have less than five percent of people with 4 or more siblings, we decided to conclude the data based on four categories, each with "0", "1","2","3+" siblings. Finally, these are confimed to be color-blind accessible using our self-generated palette. 
+
 ```{r}
 #Read in fresh datafiles
 subj <- readRDS("Data/vignette_dat.RDS") #read in subjective stress ratings
@@ -362,7 +367,8 @@ ggplot(temp, aes(x=factor(sibnum),y=Score,group=Session,colour=Session))+
   xlab("Number of Siblings")+
   ylab("Subjective Stress")+
   scale_color_manual(values=c("cadetblue3", "mediumorchid2"))+
-  ggtitle("Subjective Stress vs. Number of Slibings, faceted by Life Categories")+ theme(legend.position="bottom")
+  ggtitle("Subjective Stress vs. Number of Slibings, faceted by Life Categories")+
+  theme(legend.position="bottom")
 
 
 ```
