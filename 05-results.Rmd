@@ -271,7 +271,7 @@ colors = c('#EBF7E3',
           '#1B3409')
 vcd::mosaic(score~ domain,v_domain, direction = c("v","h"),
            highlighting_fill = colors,rot_labels=c(15,0,0,0),gp_labels = gpar(fontsize = 7),labeling_args = list(set_varnames = c(score="Subjective Stress", domain="Life Domains")),
-            main = "Subjective Stress vs Life Domains")
+            main = "Subjective Stress vs. Life Domains")
 ```
 
 The mosaic plot reveals several interesting trends. First, we see that there were relatively more work/education types of vignettes than the others. The least common type of vignette were the health/accident event. More interestingly, we can see that interpersonal tensions were the least stressful of all life domains, which is suprising given that prior work in this area has found interpersonal tensions to be the most, rather than least, stressful. We also see that financial events were deemed the most stressful. This may reflect the fact that the study was conducted during the COVID-19 pandemic, when financial sensitivity was high. It might also reflect the fact that most Columbia undergraduates are either relatively wealthy or relatively unwealthy (i.e. on scholarships) relative to the general population. These two types of financial circumstances might make financial stressors particularly problematic, as wealthy students would be concerned about their life changing to due to financial stressors (i.e one vignette descibes a call from a parent in which most family money as been lost) and unwealthy students might be particularly sensitive to dealing with financial hardships. It is also interesting to see that the discrimination scenarios were relativly well distributed. It might be that students who have experienced these types of events consider them to more or less stressful relative to students who have never experienced these types of events. With no a priori hypothesis, this is something that will be investigated in the formal analysis of this data. 
@@ -362,7 +362,7 @@ ggplot(temp, aes(x=factor(sibnum),y=Score,group=Session,colour=Session))+
   xlab("Number of Siblings")+
   ylab("Subjective Stress")+
   scale_color_manual(values=c("cadetblue3", "mediumorchid2"))+
-  ggtitle("Subjective Stress vs. Number of Slibings, faceted by Life Categories")
+  ggtitle("Subjective Stress vs. Number of Slibings, faceted by Life Categories")+ theme(legend.position="bottom")
 
 
 ```
@@ -383,6 +383,7 @@ For scenarios with *Health/Accident* problems, we can see a clear decrease of st
 ## Potential Vignettes Outliers
 
 We were also interested in visualizing the distribution of responses to the two questions asked for each scenario: 'have you experienced something like this before?' (1=yes) and 'was it easy to imagine yourself in this scenario?' (1=yes). We therefore calculated the proportion of participants who responded yes to each question and visualized a box and whisker plot of those proportions. We chose box and whisker plots because we are interested in finding outliers; in the next iteration of the study we will likely exclude scenarios that were extreme in terms of describing events that the sample hadn't experienced and being difficult to imagine oneself in the scenario.
+
 ```{r, message=FALSE, results = FALSE}
 #read in subjective ratings of vignettes
 subj <- readRDS("Data/vignette_dat.RDS")
